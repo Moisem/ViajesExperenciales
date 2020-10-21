@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTuristasTable extends Migration
+class CreateUsuariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateTuristasTable extends Migration
      */
     public function up()
     {
-        Schema::create('turistas', function (Blueprint $table) {
-            $table->string('api_token')->unique(); 
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre',15);
+            $table->string('nombre');
             $table->string('apellido_paterno',15);
             $table->string('apellido_materno',15);
             $table->date('fecha_de_nacimiento');
             $table->integer('telefono');
-            $table->string('correo',25)->unique();
-            $table->string('contraseña',25);
-            $table->string('contraseña_verificacion',25);
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->enum('cargo',['turista','administrador']);
+            $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -36,6 +36,6 @@ class CreateTuristasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turistas');
+        Schema::dropIfExists('usuarios');
     }
 }

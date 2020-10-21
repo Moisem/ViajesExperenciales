@@ -24,8 +24,8 @@ class CreateDomicilioTable extends Migration
             $table->string('numero_interior',5);
             $table->string('numero_exterior',5);
             $table->string('referencias',50);
-            $table->integer('turista_id')->unsigned();
-            $table->foreign('turista_id')->references('id')->on('turistas');
+            $table->integer('usuarios_id')->unsigned();
+            $table->foreign('usuarios_id')->references('id')->on('usuarios');
             $table->timestamps();
             $table->softDeletes();
         });
