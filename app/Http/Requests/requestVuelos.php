@@ -24,7 +24,9 @@ class requestVuelos extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'require',
+            'pais' =>'require',
+            'ciudad'=>'require',
         ];
     }
 }

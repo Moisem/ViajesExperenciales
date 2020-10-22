@@ -24,7 +24,12 @@ class requestReservacion extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'require',
+            'costo'=>'require',
+            'fecha_salida'=>'require',
+            'fecha_regreso'=>'require',
+            'acompañantes'=>'require',
+            'usuarios_id'=>'require',
         ];
     }
 }

@@ -24,7 +24,16 @@ class requestUsuarios extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'require',
+            'nombre'=>'require',
+            'apellido_paterno'=>'require',
+            'apellido_materno'=>'require',
+            'fecha_de_nacimiento'=>'require',
+            'telefono'=>'require',
+            'email'=>'require',
+            'email_verified_at'=>'require',
+            'password'=>'require',
+            'cargo'=>'require',
         ];
     }
 }

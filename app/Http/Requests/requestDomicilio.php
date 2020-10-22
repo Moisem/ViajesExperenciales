@@ -24,7 +24,16 @@ class requestDomicilio extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'require',
+            'estado'=>'require',
+            'municipio'=>'require',
+            'colonia'=>'require',
+            'codigo_postal'=>'require',
+            'calle'=>'require',
+            'numero_interior'=>'require',
+            'numero_exterior'=>'require',
+            'referencias'=>'require',
+            'usuarios_id'=>'require',
         ];
     }
 }

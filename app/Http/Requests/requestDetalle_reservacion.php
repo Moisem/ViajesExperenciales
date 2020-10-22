@@ -24,7 +24,10 @@ class requestDetalle_reservacion extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' =>'require',
+            'estado' =>'require',
+            'vuelos_id' =>'require',
+            'reservacion_id'=>'require',
         ];
     }
 }
