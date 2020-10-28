@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Domicilio;
 class controllerDomicilio extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class controllerDomicilio extends Controller
      */
     public function index()
     {
-        //
+        $domicilio = Domicilio::all();
+        return response()->json($domicilio);
     }
 
     /**
@@ -34,7 +35,9 @@ class controllerDomicilio extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $domicilio = new Domicilio;
+        $domicilio->create($request->all());
+        return response()-json($domicilio);
     }
 
     /**
@@ -45,7 +48,8 @@ class controllerDomicilio extends Controller
      */
     public function show($id)
     {
-        //
+        $id_domi=Usuarios::find($id);
+        return ($id_domi);
     }
 
     /**
@@ -68,7 +72,8 @@ class controllerDomicilio extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Domicilio::find($id)->update($request->all());
+        return  $request->all();
     }
 
     /**
@@ -79,6 +84,8 @@ class controllerDomicilio extends Controller
      */
     public function destroy($id)
     {
-        //
+        $domicilio = Domicilio::find($id);
+        $domicilio->delete();
+        return "El registro se elimino con existo";
     }
 }

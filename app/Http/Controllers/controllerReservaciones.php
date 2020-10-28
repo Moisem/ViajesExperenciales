@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Reservaciones;
 class controllerReservaciones extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class controllerReservaciones extends Controller
      */
     public function index()
     {
-        //
+        $reservacion = Reservaciones::all();
+        return response()->json($vuelo);
     }
 
     /**
@@ -34,7 +35,9 @@ class controllerReservaciones extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservacion = new Reservaciones;
+        $reservacion->create($request->all());
+        return response()-json($reservacion);
     }
 
     /**
@@ -45,7 +48,8 @@ class controllerReservaciones extends Controller
      */
     public function show($id)
     {
-        //
+        $id_reser=Reservaciones::find($id);
+        return ($id_reser);
     }
 
     /**
@@ -68,7 +72,8 @@ class controllerReservaciones extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Reservaciones::find($id)->update($request->all());
+        return  $request->all();
     }
 
     /**
@@ -79,6 +84,8 @@ class controllerReservaciones extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reservacion = Reservaciones::find($id);
+        $reservacion->delete();
+        return "El registro se elimino con existo";
     }
 }

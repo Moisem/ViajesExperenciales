@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Vuelos;
 class controllerVuelos extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class controllerVuelos extends Controller
      */
     public function index()
     {
-        //
+        $vuelo = Vuelos::all();
+        return response()->json($vuelo);
     }
 
     /**
@@ -34,7 +35,9 @@ class controllerVuelos extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vuelo = new Vuelos;
+        $vuelo->create($request->all());
+        return response()-json($vuelo);
     }
 
     /**
@@ -45,7 +48,8 @@ class controllerVuelos extends Controller
      */
     public function show($id)
     {
-        //
+        $id_vuelo=Vuelos::find($id);
+        return ($id_vuelo);
     }
 
     /**
@@ -68,7 +72,8 @@ class controllerVuelos extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Vuelos::find($id)->update($request->all());
+        return  $request->all();
     }
 
     /**
@@ -79,6 +84,8 @@ class controllerVuelos extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vuelo = Vuelos::find($id);
+        $vuelo->delete();
+        return "El registro se elimino con existo";
     }
 }
