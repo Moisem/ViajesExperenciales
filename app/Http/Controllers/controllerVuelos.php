@@ -37,7 +37,7 @@ class controllerVuelos extends Controller
     {
         $vuelo = new Vuelos;
         $vuelo->create($request->all());
-        return response()-json($vuelo);
+        return response()->json($vuelo);
     }
 
     /**

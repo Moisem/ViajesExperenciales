@@ -14,7 +14,6 @@ class CreateReservacionesTable extends Migration
     public function up()
     {
         Schema::create('reservaciones', function (Blueprint $table) {
-            $table->string('api_token')->unique(); 
             $table->increments('id');
             $table->integer('costo');
             $table->date('fecha_salida',15);

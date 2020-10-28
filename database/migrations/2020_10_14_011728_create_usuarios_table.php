@@ -24,8 +24,8 @@ class CreateUsuariosTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('cargo',['turista','administrador']);
-            $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -37,7 +37,7 @@ class controllerDomicilio extends Controller
     {
         $domicilio = new Domicilio;
         $domicilio->create($request->all());
-        return response()-json($domicilio);
+        return response()->json($request);
     }
 
     /**
@@ -48,7 +48,7 @@ class controllerDomicilio extends Controller
      */
     public function show($id)
     {
-        $id_domi=Usuarios::find($id);
+        $id_domi=Domicilio::find($id);
         return ($id_domi);
     }
 

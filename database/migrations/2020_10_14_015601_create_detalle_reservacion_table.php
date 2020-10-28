@@ -13,8 +13,7 @@ class CreateDetalleReservacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_reservacion', function (Blueprint $table) {
-            $table->string('api_token')->unique(); 
+        Schema::create('detalle_reservacions', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('estado',['activo','inactivo']);
             $table->integer('vuelos_id')->unsigned();;

@@ -37,7 +37,7 @@ class controllerUsuarios extends Controller
     {
         $usuario = new Usuarios;
         $usuario->create($request->all());
-        return response()-json($usuario);
+        return response()->json($usuario);
     }
 
     /**

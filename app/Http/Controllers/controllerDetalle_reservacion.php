@@ -35,9 +35,9 @@ class controllerDetalle_reservacion extends Controller
      */
     public function store(Request $request)
     {
-        $detalle = new Detaller_reservacion;
+        $detalle = new Detalle_reservacion;
         $detalle->create($request->all());
-        return response()-json($detalle);
+        return response()->json($request);
     }
 
     /**
@@ -48,7 +48,7 @@ class controllerDetalle_reservacion extends Controller
      */
     public function show($id)
     {
-        $id_detallei=Usuarios::find($id);
+        $id_detallei=Detalle_reservacion::find($id);
         return ($id_detallei);
     }
 

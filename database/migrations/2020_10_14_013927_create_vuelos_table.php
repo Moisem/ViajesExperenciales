@@ -14,9 +14,8 @@ class CreateVuelosTable extends Migration
     public function up()
     {
         Schema::create('vuelos', function (Blueprint $table) {
-            $table->string('api_token')->unique(); 
             $table->increments('id');
-            $table->string('pias',15);
+            $table->string('pais',15);
             $table->string('ciudad',15);
             $table->timestamps();
             $table->softDeletes();

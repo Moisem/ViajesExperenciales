@@ -14,7 +14,7 @@ class controllerReservaciones extends Controller
     public function index()
     {
         $reservacion = Reservaciones::all();
-        return response()->json($vuelo);
+        return response()->json($reservacion);
     }
 
     /**
@@ -37,7 +37,7 @@ class controllerReservaciones extends Controller
     {
         $reservacion = new Reservaciones;
         $reservacion->create($request->all());
-        return response()-json($reservacion);
+        return response()->json($request);
     }
 
     /**
