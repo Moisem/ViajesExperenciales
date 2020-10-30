@@ -10,4 +10,12 @@ class Usuarios extends Model
     protected $guarded=['id'];
     protected $fillable=['nombre', 'apellido_paterno', 'apellido_materno','fecha_de_nacimiento',
     'telefono','email','email_verified_at','password','cargo'];
+    public function domicilio()
+    {
+        return $this->hasMany(Domicilio::class);
+    }
+    public function reservaciones()
+    {
+        return $this->hasMany(Reservaciones::class);
+    }
 }

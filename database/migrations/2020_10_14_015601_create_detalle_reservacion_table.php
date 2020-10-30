@@ -17,9 +17,9 @@ class CreateDetalleReservacionTable extends Migration
             $table->increments('id');
             $table->enum('estado',['activo','inactivo']);
             $table->integer('vuelos_id')->unsigned();;
-            $table->integer('reservacion_id')->unsigned();;
+            $table->integer('reservaciones_id')->unsigned();;
             $table->foreign('vuelos_id')->references('id')->on('vuelos');
-            $table->foreign('reservacion_id')->references('id')->on('reservaciones');
+            $table->foreign('reservaciones_id')->references('id')->on('reservaciones');
             $table->softDeletes();
             $table->timestamps();
         });
