@@ -16,7 +16,7 @@ class CreateDetalleReservacionTable extends Migration
         Schema::create('detalle_reservacions', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('estado',['activo','inactivo']);
-            $table->integer('vuelos_id')->unsigned();;
+            $table->integer('vuelos_id')->unsigned();
             $table->integer('reservaciones_id')->unsigned();;
             $table->foreign('vuelos_id')->references('id')->on('vuelos');
             $table->foreign('reservaciones_id')->references('id')->on('reservaciones');

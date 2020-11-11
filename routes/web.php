@@ -15,3 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get('Usuarios','controllerUsuarios@index');
+
+Route::get('/forms', function(){
+    return View::make('forms');
+});
