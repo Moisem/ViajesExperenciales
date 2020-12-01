@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/forms', function(){
     return View::make('forms');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

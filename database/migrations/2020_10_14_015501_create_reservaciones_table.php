@@ -19,8 +19,8 @@ class CreateReservacionesTable extends Migration
             $table->date('fecha_salida',15);
             $table->date('fecha_regreso',15);
             $table->integer('acompañantes');
-            $table->integer('usuarios_id')->unsigned();
-            $table->foreign('usuarios_id')->references('id')->on('usuarios');
+            $table->integer('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
         });
