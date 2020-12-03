@@ -4,9 +4,9 @@
             <div class="col-sm"  v-for="vuelo in vuelos" :key="vuelo.id">
                 <div class="card text-center" style="width: 18rem; margin-top: 40px" >
                     <div class="card-body">
-                        <h5 class="card-title" v-text="vuelos.pais"></h5>
+                        <h5 class="card-title" v-text="vuelo.pais"></h5>
                         <h6 class="card-subtitle mb-2 text-muted" v-text="vuelos.ciudad"></h6>
-                        <p class="card-text " v-text="vuelos.descripcion"></p>
+                        <p class="card-text " v-text="vuelo.descripcion"></p>
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a href="#exampleModal" class="btn boton_delete">Eliminar</a>
                     </div>
@@ -23,12 +23,12 @@
                                 <form @submit.prevent="editarVuelos()" >
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Vuelos:</label>
-                                    <input type="text"  v-model="vuelosedit.pais" class="form-control" id="recipient-name">
+                                    <input type="text"  v-model="vueloedit.pais" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="action" class="btn btn-primary">Actualizar</button>
-                                    <!--{{materiaedit}} -->                                 
+                                    {{vuelosedit}}                             
                                 </div>
                                 </form>
                             </div>
@@ -39,35 +39,37 @@
             </div>   
     </div>
 </div>
-
-    
 </template>
 <script>
     export default {
         data (){
             return{
+                //array para obtener todos las materias
                 vuelos: [],
-                vuelosedit: [],
-            }
-        },
+                //array para modificar una materia en especifico
+                vueloedit: [],
+                }
+            },
         mounted() {
             this.getVuelos();
-            console.log('')
+            console.log('se carga la API')
         },
         methods: {
+            //función para obtener todas las materias de /api/materia con axios
             getVuelos: function () {
                  axios.get('Vuelos').then(response => {
                     this.vuelos = response.data.vuelos
                     console.log (this.vuelos);
                 });
             },
-        },
-        updateid(id){
-                this.vuelosedit = id;
+            //función para obtener el id
+            updateid(id){
+                this.vueloedit = id;
             },
+            //función para editar Materia 
             editarVuelos(){
-                let urlUpdate='Vuelos/'+ this.vuelosedit.id;
-                axios.put(urlUpdate,this.vuelosedit).then(response =>{
+                let urlUpdate='Vuelos/'+ this.vueloedit.id;
+                axios.put(urlUpdate,this.vueloedit).then(response =>{
                 if(response.data.error){
                     toastr.error(response.data.mensaje);
                 }else{
@@ -76,7 +78,8 @@
                 }
                 }).catch(error=>{
                 });
-            },
+            }
+        }
     }
 </script>
 <style scoped>

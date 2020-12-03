@@ -31,9 +31,6 @@
                     {{ config('app.name', 'TheBestTrip') }}
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                   
-
-                    
                 </div>
             </div>
         </nav>

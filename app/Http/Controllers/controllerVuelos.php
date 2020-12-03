@@ -76,13 +76,9 @@ class controllerVuelos extends Controller
      */
     public function update(Request $request, $id)
     {
-        $vuelos->update($request->all());
+        Vuelos::find($id)->update($request->all());
 
-        if($vuelos = true){
-            return response()->json(['error'=>true,'mensaje'=>'La Materia se actualizo con exito']);
-        }else{
-            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
-        }
+        return  $request->all();
     }
 
     /**

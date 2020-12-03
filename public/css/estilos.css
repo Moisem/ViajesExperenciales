@@ -1,3 +1,8 @@
+.topmargin-sm{ margin-top: 10px}
+.topmargin-md{ margin-top: 40px;}
+.topmargin-lg{ margin-top: 80px;}
+
+
 .main-footer{
     width: 100%;
     padding-top: 50px;
@@ -11,7 +16,6 @@
         color:#F9CA0B;
         border: 2px solid;
         width: 70%;
-
     }
     .img-redes img{
         width: 36px;
@@ -31,7 +35,10 @@
         z-index: 50;
         left: 20px;
     }
-
+    .im-principal{
+        min-width: 200px;
+        max-width:800px;
+    }
     .img-content img {
         -moz-transition: all 0.8s;
         -webkit-transition: all 0.8s;
@@ -53,11 +60,84 @@
         font-size: 18px;
         color: #fff;
         line-height: 25px;
-        margin-top: 0px;
+        margin-top: -40px;
         color:#fff;
+        margin-bottom: 40px;
     }
     .content-center{
         max-width: 800px;
         margin:0 auto 60px auto;
         text-align: center;
+    }
+    .btn-blanco{
+        background-color: #FFB202;
+        color:#fff;
+        font-size: 15px;
+        padding: 15px 26px;
+        width: 100%;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    .btn-blanco:hover{
+        background-color: #FFE01B;
+        color:#fff;
+    }
+    .form-registro{
+        width: 300px;
+        margin: auto;
+        display: inline-block;
+    }
+    .form-login{
+        width: 300px;
+        display: inline-block;
+    }
+    .btn-sesion{
+        padding: 20px;
+        text-align: center;
+        margin: 0;
+    }
+    .content-center2{
+        max-width: 800px;
+        margin:0 auto 60px auto;
+        text-align: center;
+    }
+    .content-center2 p{
+        color: #000;
+    }
+    .div-footer{
+        color:#F9CA0B;
+        border: 2px solid;
+        width: 70%;
+    
+    }
+    .info-nosotros{
+        margin-top:50px; 
+        margin-bottom: 50px;
+    }
+    .info-nosotros p{
+        padding: 15px;
+    }
+    .info-nosotros img{
+        max-width: 120px;
+        padding: 10px;
+        display: block; 
+        margin: auto;
+    }
+    .contacto{
+        width: 80%;
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 70px;
+    }
+    .form-contacto input{
+        width: 100%;
+        border-radius: 4px;
+        border: 2px solid #FFB202;
+        height: 50px;
+    }
+    .form-contacto textarea{
+        width: 100%;
+        height: 80px;
+        border-radius: 4px;
+        border: 2px solid #FFB202;
     }
