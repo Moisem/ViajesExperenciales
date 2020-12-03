@@ -8,10 +8,10 @@ class Reservaciones extends Model
 {
     protected $tabla='reservaciones';
     protected $guarded=['id'];
-    protected $fillable=['costo', 'fecha_salida', 'fecha_regreso','acompañantes','usuarios_id'];
+    protected $fillable=['costo', 'fecha_salida', 'fecha_regreso','acompañantes','users_id'];
     public function usuarios()
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(Users::class);
     }
     public function detalle_reservacion()
     {

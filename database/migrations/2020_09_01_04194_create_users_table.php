@@ -18,11 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('apellido_paterno',15);
             $table->string('apellido_materno',15);
-           
+            $table->date('fecha_de_nacimiento');
             $table->integer('telefono');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('cargo',['turista','administrador']);
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
