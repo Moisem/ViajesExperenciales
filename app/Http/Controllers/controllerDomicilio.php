@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Domicilio;
 class controllerDomicilio extends Controller
 {
+    public function __construct (Domiclio $domicilio) {
+        $this->domicilio = $domicilio;
+ 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class controllerDomicilio extends Controller
     public function index()
     {
         $domicilio = Domicilio::all();
-        return response()->json($domicilio);
+        return response()->json(['domicilio'=> $domicilio]);
     }
 
     /**

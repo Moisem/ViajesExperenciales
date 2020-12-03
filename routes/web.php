@@ -22,6 +22,9 @@ Route::get('/forms', function(){
 Route::get('/vuelos', function(){
     return view('vuelos.index');
 });
+Route::get('/domicilio', function(){
+    return view('domicilio.index');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
