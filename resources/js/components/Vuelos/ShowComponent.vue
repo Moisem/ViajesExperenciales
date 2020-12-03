@@ -10,30 +10,55 @@
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a href="#exampleModal" class="btn boton_delete">Eliminar</a>
                     </div>
+                    //modal editar
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Midificaion de vuelo</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form @submit.prevent="editarVuelos()" >
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Vuelos:</label>
-                                    <input type="text"  v-model="vueloedit.pais" class="form-control" id="recipient-name">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Midificaion de vuelo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" name="action" class="btn btn-primary">Actualizar</button>                           
+                                <div class="modal-body">
+                                    <form @submit.prevent="editarVuelos()" >
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Vuelos:</label>
+                                        <input type="text"  v-model="vueloedit.pais" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="action" class="btn btn-primary" data-dismiss="modal">Actualizar</button>                           
+                                    </div>
+                                    </form>
                                 </div>
-                                </form>
-                            </div>
                             </div>
                         </div>
-                </div>
+                    </div>
+                    //fin modal editar
+                            // modal delete
+                            <div class="modal fade" id="deletemateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Materia</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                            <div class="modal-body">
+                                                <h4>¿Esta seguro que quieres eliminar la materia <span class="badge badge-pill badge-warning">{{materiadelete.nombre}}</span>?</h4>
+                                                <!--{{materiadelete}}-->                            
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-danger" @click="deleteMateria(materiadelete.id)">Eliminar</button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            //fin modal delete
+                    
                 </div>
             </div>   
     </div>
@@ -77,7 +102,22 @@
                 }
                 }).catch(error=>{
                 });
-            }
+            },
+            deleteid(id){
+                this.vuelodelete =id; 
+            },
+            deleteMateria(id){
+                let urldeleteVuelo = 'Vuelos/' + id;
+                axios.delete(urldeleteMateria,this.vuelodelete).then (response=>{
+                    if(response.data.error){
+                    //mensaje de error
+                    consolo.log('ocurrio un error');
+                }else{
+                    console.log('se elimino de manera correctamente')
+                }
+            }).catch(error =>{
+            });
+        },
         }
     }
 </script>

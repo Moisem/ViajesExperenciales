@@ -2020,6 +2020,20 @@ __webpack_require__.r(__webpack_exports__);
           $('#exampleModal').modal('hide');
         }
       })["catch"](function (error) {});
+    },
+    deleteid: function deleteid(id) {
+      this.vuelodelete = id;
+    },
+    deleteMateria: function deleteMateria(id) {
+      var urldeleteVuelo = 'Vuelos/' + id;
+      axios["delete"](urldeleteMateria, this.vuelodelete).then(function (response) {
+        if (response.data.error) {
+          //mensaje de error
+          consolo.log('ocurrio un error');
+        } else {
+          console.log('se elimino de manera correctamente');
+        }
+      })["catch"](function (error) {});
     }
   }
 });
@@ -38498,7 +38512,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "btn btn-primary",
-          attrs: { type: "submit", name: "action" }
+          attrs: { type: "submit", name: "action", "data-dismiss": "modal" }
         },
         [_vm._v("Actualizar")]
       )
@@ -50950,8 +50964,8 @@ component.options.__file = "resources/js/components/Vuelos/UpdateComponent.vue"
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\INEA\Desktop\Viajes_DSM-42\ViajesExperenciales\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\INEA\Desktop\Viajes_DSM-42\ViajesExperenciales\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Viajesexperenciales\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Viajesexperenciales\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
