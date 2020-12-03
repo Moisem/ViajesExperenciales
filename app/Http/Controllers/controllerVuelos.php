@@ -39,7 +39,7 @@ class controllerVuelos extends Controller
      */
     public function store(Request $request)
     {
-        $vuelo = new Vuelos;
+        $vuelo = new Vuelos;    
         $vuelo->create($request->all());
         return response()->json($vuelo);
     }
