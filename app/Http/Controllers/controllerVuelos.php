@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Vuelos;
 class controllerVuelos extends Controller
 {
+    public function __construct (Vuelos $vuelo) {
+        $this->vuelo = $vuelo;
+ 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +17,8 @@ class controllerVuelos extends Controller
      */
     public function index()
     {
-        $vuelo = Vuelos::all();
-        return response()->json($vuelo);
+        $vuelos = Vuelos::all();
+        return response()->json(['vuelos'=> $vuelos]);
     }
 
     /**
@@ -72,8 +76,13 @@ class controllerVuelos extends Controller
      */
     public function update(Request $request, $id)
     {
-        Vuelos::find($id)->update($request->all());
-        return  $request->all();
+        $vuelos->update($request->all());
+
+        if($vuelos = true){
+            return response()->json(['error'=>true,'mensaje'=>'La Materia se actualizo con exito']);
+        }else{
+            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
+        }
     }
 
     /**

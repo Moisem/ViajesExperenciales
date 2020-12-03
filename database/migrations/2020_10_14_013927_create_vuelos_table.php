@@ -17,6 +17,8 @@ class CreateVuelosTable extends Migration
             $table->increments('id');
             $table->string('pais',15);
             $table->string('ciudad',15);
+            $table->string('descripcion',100);
+            $table->string('img');
             $table->timestamps();
             $table->softDeletes();
         });

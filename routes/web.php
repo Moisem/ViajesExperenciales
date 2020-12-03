@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/forms', function(){
     return View::make('forms');
 });
+Route::get('/vuelos', function(){
+    return view('vuelos.index');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
