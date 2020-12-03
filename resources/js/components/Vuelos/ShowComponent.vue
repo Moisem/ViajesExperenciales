@@ -5,7 +5,7 @@
                 <div class="card text-center" style="width: 18rem; margin-top: 40px" >
                     <div class="card-body">
                         <h5 class="card-title" v-text="vuelo.pais"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" v-text="vuelos.ciudad"></h6>
+                        <h6 class="card-subtitle mb-2 text-muted" v-text="vuelo.ciudad"></h6>
                         <p class="card-text " v-text="vuelo.descripcion"></p>
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a href="#exampleModal" class="btn boton_delete">Eliminar</a>
@@ -27,8 +27,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" name="action" class="btn btn-primary">Actualizar</button>
-                                    {{vuelosedit}}                             
+                                    <button type="submit" name="action" class="btn btn-primary">Actualizar</button>                           
                                 </div>
                                 </form>
                             </div>
