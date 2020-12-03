@@ -88,6 +88,9 @@
                       </button>
                     </div>
                   </form>
+        
+                            //fin modal delete
+                    
                 </div>
               </div>
             </div>
