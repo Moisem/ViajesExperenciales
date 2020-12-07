@@ -1,24 +1,22 @@
 <template>
   <div>
-    <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary">
-      Insertar Vuelo
-    </button>
     <div class="row">
             <div class="col-sm"  v-for="vuelo in vuelos" :key="vuelo.id">
                 <div class="card text-center" style="width: 18rem; margin-top: 40px" >
                     <div class="card-body">
                         <h5 class="card-title" v-text="vuelo.pais"></h5>
                         <h6 class="card-subtitle mb-2 text-muted" v-text="vuelo.ciudad"></h6>
-                        <p class="card-text " v-text="vuelo.descripcion"></p>
+                        <p class="card-text" v-text="vuelo.descripcion"></p>
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a data-toggle="modal" data-target="#deletevuelos" type="button" class="boton_delete" v-on:click="deleteid(vuelo)" >Eliminar</a>
+                        <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
                     </div>
                     <!--  modal update -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Midificaion de vuelo</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Modificar Vuelo</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -26,8 +24,16 @@
                                 <div class="modal-body">
                                     <form @submit.prevent="editarVuelos()" >
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Vuelos:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Vuelos:</label>
                                         <input type="text"  v-model="vueloedit.pais" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left" for="recipient-name" class="col-form-label">Ciudad:</label>
+                                        <input type="text"  v-model="vueloedit.ciudad" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
+                                        <input type="text"  v-model="vueloedit.descripcion" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -44,13 +50,13 @@
                                 <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Materia</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Vuelo</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                             <div class="modal-body">
-                                                <h4>¿Esta seguro que quieres eliminar la materia <span class="badge badge-pill badge-warning">{{vuelodelete.pais}}</span>?</h4>
+                                                <h4>¿Quieres eliminar el vuelo a<span class="badge badge-pill badge-primary">{{vuelodelete.pais}}</span>?</h4>
                                                 <!--{{materiadelete}}-->                            
                                             </div>
                                             <div class="modal-footer">
@@ -61,7 +67,37 @@
                                 </div>
                             </div>
                             <!-- fin modal delete -->
-                    
+                    <!-- modal create -->
+                    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Nuevo Vuelo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form @submit.prevent="createVuelo()">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <input type="text" v-model="newvuelo.pais" class="form-control" id="recipient-name">
+                                </div>
+                                
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="action" class="btn btn-primary">Guardar</button>
+                                </div>
+                                </form>
+                            </div>
+                        
+                            </div>
+
+                        </div>
+
+                </div>
+                <!-- fin modal create -->
                 </div>
             </div>   
     </div>
@@ -77,6 +113,9 @@
                 vueloedit: [],
                 //delete vuelos
                 vuelodelete: [],
+                //nuevo vuelo
+                newvuelo:{
+                    pais:" "},
                 }
             },
         mounted() {
@@ -100,29 +139,44 @@
                 let urlUpdate='Vuelos/'+ this.vueloedit.id;
                 axios.put(urlUpdate,this.vueloedit).then(response =>{
                 if(response.data.error){
-                    toastr.error(response.data.mensaje);
-                }else{
-                    toastr.success(response.data.mensaje);
+                    consolo.log("ocurrio un error");
+                    } else {
+                console.log("Se Actualizo de manera correctamente");
                     $('#exampleModal').modal('hide')
                 }
                 }).catch(error=>{
                 });
             },
-            
+            //función para eliminir Vuelos
             deleteid(id) {
                 this.vuelodelete = id;
             },
             deleteVuelo(id) {
             let urldeleteVuelo = "Vuelos/" + id;
-            axios .delete(urldeleteVuelo, this.vuelodelete) .then((response) => {
+            axios.delete(urldeleteVuelo, this.vuelodelete) .then((response) => {
             if (response.data.error) {
                 consolo.log("ocurrio un error");
             } else {
                 console.log("se elimino de manera correctamente");
+                $('#deletevuelos').modal('hide')
             }
             })
             .catch((error) => {});
         },
+        //nuevo vuelo
+        createVuelo(){
+            let url="Vuelos";
+            axios.post(url,this.newvuelo).then(response=>{
+                if(response.data.error ){
+                    console.log("ocurrio un error al guarda");
+                }else{
+                    this.newvuelo.pais="";
+                    $('#guardarModal').modal('hide');
+                }
+            }).catch(error=>{
+               console.log("ocurrio un error al guarda"); 
+            });
+         },
         }
     }
 </script>

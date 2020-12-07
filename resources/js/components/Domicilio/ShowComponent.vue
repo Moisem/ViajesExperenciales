@@ -1,49 +1,174 @@
 <template>
-  <div class="cards">
-    <h2 class="header">Responsive Cards CSS</h2>
-    <div class="services" v-for="domicilio in domicilios" :key="domicilio.id">
-      <div class="content content-1" >
-        <div class="fab fa-twitter"></div>
-        <h2 v-text="domicilio.estado"></h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita
-          ullam aliquid non eligendi, nemo est neque reiciendis error?
-        </p>
-        <a href="#">Read More</a>
-      </div>
-    </div>
-  </div>
+<div>
+          <div class="row">
+            <div class="col-sm" v-for="domicilio in domicilios" :key="domicilio.id">
+              <div class="cards">
+              <div class="services" >
+                <div class="content content-1" >
+                  <div class="fab fa-twitter"></div>
+                  <h2>Domicilio</h2>
+                  <h4 align="left">Usuarios:</h4>
+                  <h3 v-text="domicilio.users_id">Estado:</h3>
+                  <h4 align="left">Estado:</h4>
+                  <h3 v-text="domicilio.estado">Estado:</h3>
+                  <h4 align="left">Municipio:</h4>
+                  <h3 v-text="domicilio.municipio"></h3>
+                  <h4 align="left">Colonia:</h4>
+                  <h3 v-text="domicilio.colonia"></h3>
+                  <h4 align="left">Codigo Postal:</h4>
+                  <h3 v-text="domicilio.codigo_postal"></h3>
+                  <h4 align="left">Calle:</h4>
+                  <h3 v-text="domicilio.calle"></h3>
+                  <h4 align="left">Numero Interior:</h4>
+                  <h3 v-text="domicilio.numero_interior"></h3>
+                  <h4 align="left">Numero Exterior:</h4>
+                    <h3 v-text="domicilio.numero_exterior"></h3> 
+                  <h4 align="left">Referencias:</h4>
+                  <p v-text="domicilio.referencias"> </p>
+                  <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(domicilio)">Editar</a>
+                  <a data-toggle="modal" data-target="#deleteDomicilio" type="button" class="boton_delete" v-on:click="deleteid(domicilio)" >Eliminar</a>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <!--  modal update -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modificar Vuelo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="editarDomcilio()" >
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Estado:</label>
+                                        <input type="text"  v-model="domicilioedit.estado" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Municipio:</label>
+                                        <input type="text"  v-model="domicilioedit.municipio" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Colonia:</label>
+                                        <input type="text"  v-model="domicilioedit.colonia" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Codigo Postal:</label>
+                                        <input type="text"  v-model="domicilioedit.codigo_postal" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Calle:</label>
+                                        <input type="text"  v-model="domicilioedit.calle" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Numero Exterior:</label>
+                                        <input type="text"  v-model="domicilioedit.numero_exterior" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Numero Interior:</label>
+                                        <input type="text"  v-model="domicilioedit.numero_interior" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label align="left"  for="recipient-name" class="col-form-label">Referencias:</label>
+                                        <input type="text"  v-model="domicilioedit.referencias" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="action" class="btn btn-primary">Actualizar</button>                           
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          <!-- fin modal update -->
+          <!-- modal delete -->
+                          <div class="modal fade" id="deleteDomicilio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Materia</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                            <div class="modal-body">
+                                                <h4>¿Esta seguro que quieres eliminar el domcilio de usuario<span class="badge badge-pill badge-danger">{{domiciliodelete.users_id}}</span>?</h4>                         
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-danger" @click="deleteDomicilio(domiciliodelete.id)">Eliminar</button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                <!-- fin modal delete -->
+</div>
 </template>
 <script>
-    export default {
-        data (){
-            return{
-                //show vuelos
-                domicilios: [],
-
-                }
-            },
-        mounted() {
+        export default {
+          data() {
+            return {
+              //
+              domicilios: [],
+              domiciliodelete:[],
+              domicilioedit:[],
+            };
+          },
+          mounted() {
             this.getDomicilio();
-            console.log('se carga la API')
-        },
-        methods: {
+            console.log("se carga la API");
+          },
+          methods: {
             //función para obtener vuelos
             getDomicilio: function () {
-                 axios.get('Domicilio').then(response=> {
-                    this.domicilios = response.data.domicilios
-                    console.log (this.domicilios);
+              axios.get("Domicilio").then((response) => {
+                this.domicilios = response.data.domicilios;
+                console.log(this.domicilios);
+              });
+            },
+              updateid(id){
+              this.domicilioedit = id;
+            },
+            editarDomcilio(){
+                let urlUpdate='Domicilio/'+ this.domicilioedit.id;
+                axios.put(urlUpdate,this.domicilioedit).then(response =>{
+                if(response.data.error){
+                    consolo.log("ocurrio un error");
+                    } else {
+                console.log("Se Actualizo de manera correctamente");
+                    $('#exampleModal').modal('hide')
+                }
+                }).catch(error=>{
                 });
             },
             
-    }
-    }
+            deleteid(id) {
+                this.domiciliodelete = id;
+            },
+            deleteDomicilio(id) {
+            let urldeleteDomcilio = "Domicilio/" + id;
+            axios.delete(urldeleteDomcilio, this.domiciliodelete) .then((response) => {
+            if (response.data.error) {
+                consolo.log("ocurrio un error");
+            } else {
+                console.log("se elimino de manera correctamente");
+            }
+            })
+            .catch((error) => {});
+        },
+          },
+        };
 </script>
 
 <style >
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800|Poppins&display=swap");
 .cards {
-  max-width: 1100px;
+  max-width: 400px;
   margin: 0 auto;
   text-align: center;
   padding: 30px;
@@ -75,62 +200,66 @@
 .content > * {
   flex: 1 1 100%;
 }
-.content:hover {
-  color: white;
-}
-.content:hover a {
-  border-color: white;
-  background: white;
-}
-.content-1:hover {
-  border-color: #1da1f2;
-  background: #1da1f2;
-}
-.content-1:hover a {
-  color: #1da1f2;
-}
-.content-2:hover {
-  border-color: #e1306c;
-  background: #e1306c;
-}
-.content-2:hover a {
-  color: #e1306c;
-}
-.content-3:hover {
-  border-color: #ff0000;
-  background: #ff0000;
-}
-.content-3:hover a {
-  color: #ff0000;
-}
 .content h2 {
-  font-size: 30px;
-  margin: 16px 0;
+  font-size: 12px;
+  margin: 8px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.content h4 {
+  font-size: 10px;
+  margin: 5px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.content h3 {
+  font-size: 9px;
+  margin: 3px 0;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 .content p {
-  font-size: 17px;
+  font-size: 9px;
   font-family: "Poppins", sans-serif;
-}
-.content a {
-  margin: 22px 0;
-  background: black;
-  color: white;
-  text-decoration: none;
   text-transform: uppercase;
-  border: 1px solid black;
-  padding: 15px 0;
-  border-radius: 25px;
-  transition: 0.3s ease;
 }
 .content a:hover {
   border-radius: 4px;
 }
-@media (max-width: 900px) {
-  .services {
-    display: flex;
-    flex-direction: column;
+.boton_edit{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 15px;
+    font-style: italic;
+    color: #006558;
+    background-color: #82b085;
+    border-radius: 15px;
+    border: 3px double #dee9de;
   }
-}
+  .boton_edit:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  .boton_delete{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 15px;
+    font-style: italic;
+    color: #650000;
+    background-color: #a00527;
+    border-radius: 15px;
+    border: 3px double #f7faf7;
+  }
+  .boton_delete:hover{
+    opacity: 0.6;
+    text-decoration: none;
+    }
 </style>

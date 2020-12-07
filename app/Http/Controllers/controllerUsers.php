@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Vuelos;
-class controllerVuelos extends Controller
+use App\Useris;
+class controllerUsers extends Controller
 {
-    public function __construct (Vuelos $vuelo) {
-        $this->vuelo = $vuelo;
- 
-    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +13,8 @@ class controllerVuelos extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelos::all();
-        return response()->json(['vuelos'=> $vuelos]);
+        $usuario = Usuarios::all();
+        return response()->json($usuario);
     }
 
     /**
@@ -26,14 +22,9 @@ class controllerVuelos extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(equest $request)
+    public function create()
     {
-        $vuelo = $this->vuelo->create($request->all());
-        if($vuelo  == true){
-            return response()->json(['error'=>true,'mensaje'=>'La Materia se guardo con exito']);
-        }else{
-            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
-        }
+        //
     }
 
     /**
@@ -44,7 +35,9 @@ class controllerVuelos extends Controller
      */
     public function store(Request $request)
     {
-        
+        $usuario = new Usuarios;
+        $usuario->create($request->all());
+        return response()->json($usuario);
     }
 
     /**
@@ -55,8 +48,8 @@ class controllerVuelos extends Controller
      */
     public function show($id)
     {
-        $id_vuelo=Vuelos::find($id);
-        return ($id_vuelo);
+        $id_us=Usuarios::find($id);
+        return ($id_us);
     }
 
     /**
@@ -79,7 +72,7 @@ class controllerVuelos extends Controller
      */
     public function update(Request $request, $id)
     {
-        Vuelos::find($id)->update($request->all());
+        Usuarios::find($id)->update($request->all());
         return  $request->all();
     }
 
@@ -91,8 +84,8 @@ class controllerVuelos extends Controller
      */
     public function destroy($id)
     {
-        $vuelo = Vuelos::find($id);
-        $vuelo->delete();
+        $usuarios = Usuarios::find($id);
+        $usuarios->delete();
         return "El registro se elimino con existo";
     }
 }

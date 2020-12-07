@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Domicilio;
 class controllerDomicilio extends Controller
 {
-    public function __construct (Domiclio $domicilio) {
+    public function __construct (Domicilio $domicilio) {
         $this->domicilio = $domicilio;
  
     }
@@ -17,8 +17,8 @@ class controllerDomicilio extends Controller
      */
     public function index()
     {
-        $domicilio = Domicilio::all();
-        return response()->json(['domicilio'=> $domicilio]);
+        $domicilios = Domicilio::all();
+        return response()->json(['domicilios'=> $domicilios]);
     }
 
     /**
@@ -78,6 +78,7 @@ class controllerDomicilio extends Controller
     {
         Domicilio::find($id)->update($request->all());
         return  $request->all();
+
     }
 
     /**
