@@ -1,5 +1,6 @@
 <template>
 <div>
+  <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Nuevo Domicilio</i></button>
           <div class="row">
             <div class="col-sm" v-for="domicilio in domicilios" :key="domicilio.id">
               <div class="cards">
@@ -107,6 +108,64 @@
                                 </div>
                             </div>
                 <!-- fin modal delete -->
+                <!-- modal create -->
+                    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Nuevo Domcilio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form @submit.prevent="createDomcilio()">
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Id del Usuario:</label>
+                                    <input type="text" v-model="newdomicilio.users_id" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Estado:</label>
+                                    <input type="text" v-model="newdomicilio.estado" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Municipio:</label>
+                                    <input type="text" v-model="newdomicilio.municipio" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Colonia:</label>
+                                    <input type="text" v-model="newdomicilio.colonia" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Codigo Postal:</label>
+                                    <input type="text" v-model="newdomicilio.codigo_postal" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Calle:</label>
+                                    <input type="text" v-model="newdomicilio.calle" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Numero Interior:</label>
+                                    <input type="text" v-model="newdomicilio.numero_interior" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Numero Exterior:</label>
+                                    <input type="text" v-model="newdomicilio.numero_exterior" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Referencias:</label>
+                                    <input type="text" v-model="newdomicilio.referencias" class="form-control" id="recipient-name">
+                                </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="action" class="btn btn-primary">Guardar</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                </div>
+                <!-- fin modal create -->
 </div>
 </template>
 <script>
@@ -117,6 +176,17 @@
               domicilios: [],
               domiciliodelete:[],
               domicilioedit:[],
+              newdomicilio:{
+                estado:"",
+                municipio:"",
+                colonia:"",
+                codigo_postal:"",
+                calle:"",
+                numero_interior:"",
+                numero_exterior:"",
+                referencias:"",
+                users_id:"",
+              }
             };
           },
           mounted() {
@@ -161,6 +231,27 @@
             })
             .catch((error) => {});
         },
+        createDomcilio(){
+            let url="Domicilio";
+            axios.post(url,this.newdomicilio).then(response=>{
+                if(response.data.error ){
+                    console.log("ocurrio un error al guarda");
+                }else{
+                    this.newdomicilio.estado="",
+                    this.newdomicilio.municipio="",
+                    this.newdomicilio.colonia="",
+                    this.newdomicilio.codigo_postal="",
+                    this.newdomicilio.calle="",
+                    this.newdomicilio.numero_interior="",
+                    this.newdomicilio.numero_exterior="",
+                    this.newdomicilio.referencias="",
+                    this.newdomicilio.users_id=""
+                    $('#guardarModal').modal('hide');
+                }
+            }).catch(error=>{
+               console.log("ocurrio un error al guarda"); 
+            });
+        },
           },
         };
 </script>
@@ -172,11 +263,11 @@
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
-  padding: 30px;
+  padding: 10px;
 }
 .cards h2.header {
-  font-size: 40px;
-  margin: 0 0 30px 0;
+  font-size: 20px;
+  margin: 0 0 10px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -196,7 +287,7 @@
 }
 .content .fab {
   font-size: 70px;
-  margin: 16px 0;
+  margin: 5px 0;
 }
 .content > * {
   flex: 1 1 100%;
