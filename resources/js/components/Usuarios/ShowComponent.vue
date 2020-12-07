@@ -23,7 +23,7 @@
                <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(usuario)">Editar</a>
           </td>
           <td>
-            <a data-toggle="modal" data-target="#deletevuelos" type="button" class="boton_delete" v-on:click="deleteid(usuario)" >Eliminar</a>
+            <a data-toggle="modal" data-target="#deleteUsuario" type="button" class="boton_delete" v-on:click="deleteid(usuario)" >Eliminar</a>
           </td>
           <td></td>
         </tr>
@@ -42,19 +42,19 @@
                                 <div class="modal-body">
                                     <form @submit.prevent="editarUsuario()" >
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Vuelos:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Nombre:</label>
                                         <input type="text"  v-model="usuarioedit.name" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left" for="recipient-name" class="col-form-label">Ciudad:</label>
+                                        <label align="left" for="recipient-name" class="col-form-label">Apellido Paterno:</label>
                                         <input type="text"  v-model="usuarioedit.apellido_paterno" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
+                                        <label align="left" for="recipient-name" class="col-form-label">Apellido Materno:</label>
                                         <input type="text"  v-model="usuarioedit.apellido_materno" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
+                                        <label align="left" for="recipient-name" class="col-form-label">Telefono:</label>
                                         <input type="text"  v-model="usuarioedit.telefono" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="modal-footer">
@@ -75,6 +75,7 @@
             return {
               usuarios: [],
               usuarioedit: [],
+              usuariodelete: [],
             };
           },
           mounted() {
@@ -103,6 +104,7 @@
                 }).catch(error=>{
                 });
             },
+            
           },
         };
 </script>

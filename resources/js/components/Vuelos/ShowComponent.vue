@@ -1,5 +1,6 @@
 <template>
   <div>
+      <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
     <div class="row">
             <div class="col-sm"  v-for="vuelo in vuelos" :key="vuelo.id">
                 <div class="card text-center" style="width: 18rem; margin-top: 40px" >
@@ -9,7 +10,7 @@
                         <p class="card-text" v-text="vuelo.descripcion"></p>
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a data-toggle="modal" data-target="#deletevuelos" type="button" class="boton_delete" v-on:click="deleteid(vuelo)" >Eliminar</a>
-                        <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
+                        
                     </div>
                     <!--  modal update -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,22 +81,29 @@
                             <div class="modal-body">
                                 <form @submit.prevent="createVuelo()">
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <label align="left" for="recipient-name" class="col-form-label">Pais:</label>
                                     <input type="text" v-model="newvuelo.pais" class="form-control" id="recipient-name">
                                 </div>
-                                
-                                
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Ciudad:</label>
+                                    <input type="text" v-model="newvuelo.ciudad" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
+                                    <input type="text" v-model="newvuelo.descripcion" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label align="left" for="recipient-name" class="col-form-label">URL de Imagen:</label>
+                                    <input type="text" v-model="newvuelo.img" class="form-control" id="recipient-name">
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="action" class="btn btn-primary">Guardar</button>
                                 </div>
                                 </form>
                             </div>
-                        
                             </div>
-
                         </div>
-
                 </div>
                 <!-- fin modal create -->
                 </div>
@@ -115,7 +123,11 @@
                 vuelodelete: [],
                 //nuevo vuelo
                 newvuelo:{
-                    pais:" "},
+                    pais:"",
+                    ciudad:"",
+                    descripcion:"",
+                    img:"",
+                    },
                 }
             },
         mounted() {
@@ -170,15 +182,15 @@
                 if(response.data.error ){
                     console.log("ocurrio un error al guarda");
                 }else{
-                    this.newvuelo.pais="";
+                    this.newvuelo.pais="",this.newvuelo.ciudad="",this.newvuelo.descripcion="",this.newvuelo.img="";
                     $('#guardarModal').modal('hide');
                 }
             }).catch(error=>{
                console.log("ocurrio un error al guarda"); 
             });
-         },
-        }
+        },
     }
+}
 </script>
 <style scoped>
 

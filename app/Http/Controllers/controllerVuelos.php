@@ -28,12 +28,7 @@ class controllerVuelos extends Controller
      */
     public function create(equest $request)
     {
-        $vuelo = $this->vuelo->create($request->all());
-        if($vuelo  == true){
-            return response()->json(['error'=>true,'mensaje'=>'La Materia se guardo con exito']);
-        }else{
-            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
-        }
+        
     }
 
     /**
@@ -44,7 +39,8 @@ class controllerVuelos extends Controller
      */
     public function store(Request $request)
     {
-        
+        $vuelo = $this->vuelo->create($request->all());
+            return;
     }
 
     /**

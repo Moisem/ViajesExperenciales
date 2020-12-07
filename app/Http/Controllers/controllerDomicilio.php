@@ -39,9 +39,8 @@ class controllerDomicilio extends Controller
      */
     public function store(Request $request)
     {
-        $domicilio = new Domicilio;
-        $domicilio->create($request->all());
-        return response()->json($request);
+        $domicilio = $this->domicilio->create($request->all());
+        return;
     }
 
     /**
