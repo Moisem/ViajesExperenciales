@@ -8,7 +8,7 @@ class controllerDomicilio extends Controller
 {
     public function __construct (Domicilio $domicilio) {
         $this->domicilio = $domicilio;
-        $this->middleware('auth');
+        //$this->middleware('auth');
  
     }
     /**
@@ -16,10 +16,11 @@ class controllerDomicilio extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+/*
     public function page(){
         return view('domicilio.index');
     }
+    */
     public function index()
     {
         $domicilios = Domicilio::all();
