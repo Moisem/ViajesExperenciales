@@ -37,10 +37,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <li><a class="nav-item nav-link" href="{{route('usuarios')}}">Usuarios</a></li>
+                        <li><a class="nav-item nav-link" href="">Usuarios</a></li>
 						<li><a class="nav-item nav-link" href="{{route('vuelos')}}" >Vuelos</a></li>
-						<li><a class="nav-item nav-link" href="{{route('reservaciones')}}" >Reservaciones</a></li>
-                        <li><a class="nav-item nav-link" href="{{route('domicilio')}}" >Domicilios</a></li>
+						<li><a class="nav-item nav-link" href="" >Reservaciones</a></li>
+                        <li><a class="nav-item nav-link" href="" >Domicilios</a></li>
                         @endauth
                     </ul>
                     <!-- Right Side Of Navbar -->
