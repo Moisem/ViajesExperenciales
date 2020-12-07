@@ -20,7 +20,7 @@ Route::get('/forms', function(){
     return View::make('forms');
 });
 Route::get('/vuelos', function(){
-    return view('vuelos.index');
+    return view('vuelos.index')->middleware('auth');
 });
 Route::get('/domicilio', function(){
     return view('domicilio.index');
