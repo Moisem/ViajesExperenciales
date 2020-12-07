@@ -6,8 +6,8 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Vuelos', require('./components/Vuelos/ShowComponent.vue').default);
-Vue.component('Domicilio', require('./components/Domicilio/ShowComponent.vue').default);
-Vue.component('Usuarios', require('./components/Usuarios/ShowComponent.vue').default);
+Vue.component('Domicilios', require('./components/Domicilio/ShowComponent.vue').default);
+Vue.component('Usuario', require('./components/Usuarios/ShowComponent.vue').default);
 const app = new Vue({
     el: '#app',
 });

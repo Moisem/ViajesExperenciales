@@ -11,7 +11,6 @@
           <th>Email</th>
           <th>Telefono</th>
           <th>Editar</th>
-          <th>Eliminar</th>
         </tr>
         <tr v-for="usuario in usuarios" :key="usuario.id">
           <td v-text="usuario.name"></td>
@@ -22,9 +21,7 @@
           <td>
                <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(usuario)">Editar</a>
           </td>
-          <td>
-            <a data-toggle="modal" data-target="#deleteUsuario" type="button" class="boton_delete" v-on:click="deleteid(usuario)" >Eliminar</a>
-          </td>
+
           <td></td>
         </tr>
       </table>
@@ -75,7 +72,6 @@
             return {
               usuarios: [],
               usuarioedit: [],
-              usuariodelete: [],
             };
           },
           mounted() {

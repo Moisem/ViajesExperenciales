@@ -15,9 +15,20 @@ class controllerVuelos extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
 
     public function index()
     {
+=======
+/*
+    public function page(){
+        return view('vuelos.index');
+    }
+    */
+    public function index()
+    {
+        //return view('vuelos.index');
+>>>>>>> bfead176ad2842b7104f3658e48e3a53c580301c
         $vuelos = Vuelos::all();
         return response()->json(['vuelos'=> $vuelos]);
     }
