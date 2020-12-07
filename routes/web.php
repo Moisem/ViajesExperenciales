@@ -19,15 +19,11 @@ Route::get('/', function () {
 Route::get('/forms', function(){
     return View::make('forms');
 });
-Route::get('/vuelos', function(){
-    return view('vuelos.index')->middleware('auth');
-});
-Route::get('/domicilio', function(){
-    return view('domicilio.index');
-});
-Route::get('/usuarios', function(){
-    return view('usuarios.index');
-});
+Route::get('/vuelos', 'controllerVuelos@page')->name('vuelos');
+Route::get('/usuarios', 'controllerUsuarios@page')->name('usuarios');
+Route::get('/domicilio', 'controllerDomicilio@page')->name('domicilio');
+Route::get('/reservaciones', 'controllerReservaciones@page')->name('reservaciones');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

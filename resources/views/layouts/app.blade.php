@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="fixed-top">
+        <!--<div class="fixed-top">-->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
             <a href="/"><img class="logo" src="{{asset('img/logo.jpg')}}"></a>
@@ -37,10 +37,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <li><a class="nav-item nav-link" href="">Usuarios</a></li>
-						<li><a class="nav-item nav-link" href="" >Vuelos</a></li>
-						<li><a class="nav-item nav-link" href="" >Reservaciones</a></li>
-                        <li><a class="nav-item nav-link" href="" >Domicilios</a></li>
+                        <li><a class="nav-item nav-link" href="{{route('usuarios')}}">Usuarios</a></li>
+						<li><a class="nav-item nav-link" href="{{route('vuelos')}}" >Vuelos</a></li>
+						<li><a class="nav-item nav-link" href="{{route('reservaciones')}}" >Reservaciones</a></li>
+                        <li><a class="nav-item nav-link" href="{{route('domicilio')}}" >Domicilios</a></li>
                         @endauth
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </nav>
-        </div>
+        <!--</div>-->
 
         <main class="py-4">
             @yield('content')

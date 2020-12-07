@@ -8,13 +8,16 @@ class controllerUsuarios extends Controller
 {
     public function __construct (Users $usuario) {
         $this->usuario = $usuario;
- 
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function page(){
+        return view('usuarios.index');
+    }
     public function index()
     {
         $usuarios = Users::all();

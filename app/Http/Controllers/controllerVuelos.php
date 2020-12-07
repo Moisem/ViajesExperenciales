@@ -8,15 +8,20 @@ class controllerVuelos extends Controller
 {
     public function __construct (Vuelos $vuelo) {
         $this->vuelo = $vuelo;
- 
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function page(){
+        return view('vuelos.index');
+    }
     public function index()
     {
+        return view('vuelos.index');
         $vuelos = Vuelos::all();
         return response()->json(['vuelos'=> $vuelos]);
     }
@@ -26,7 +31,7 @@ class controllerVuelos extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(equest $request)
+    public function create(Request $request)
     {
         $vuelo = $this->vuelo->create($request->all());
         if($vuelo  == true){

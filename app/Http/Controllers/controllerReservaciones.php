@@ -11,6 +11,15 @@ class controllerReservaciones extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct (Reservaciones $reservacion) {
+        $this->reservacion = $reservacion;
+        $this->middleware('auth');
+ 
+    }
+    public function page() {
+        return view('reservaciones.index');
+    }
     public function index()
     {
         $reservacion = Reservaciones::all();
