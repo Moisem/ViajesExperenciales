@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuarios;
+use App\Users;
 class controllerUsuarios extends Controller
 {
+    public function __construct (Users $usuario) {
+        $this->usuario = $usuario;
+ 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +17,8 @@ class controllerUsuarios extends Controller
      */
     public function index()
     {
-        $usuario = Usuarios::all();
-        return response()->json($usuario);
+        $usuarios = Users::all();
+        return response()->json(['usuarios'=> $usuarios]);
     }
 
     /**
@@ -72,8 +76,8 @@ class controllerUsuarios extends Controller
      */
     public function update(Request $request, $id)
     {
-        Usuarios::find($id)->update($request->all());
-        return  $request->all();
+        Users::find($id)->update($request->all());
+        return ;
     }
 
     /**
@@ -84,8 +88,7 @@ class controllerUsuarios extends Controller
      */
     public function destroy($id)
     {
-        $usuarios = Usuarios::find($id);
+        $usuarios = Users::find($id);
         $usuarios->delete();
-        return "El registro se elimino con existo";
     }
 }

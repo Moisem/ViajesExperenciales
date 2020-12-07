@@ -21,5 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('Domicilio','controllerDomicilio');
 Route::apiResource('Reservaciones','controllerReservaciones');
 Route::apiResource('Historial','controllerDetalle_reservacion');
-Route::apiResource('Usuario','controllerUsers');
+Route::apiResource('Usuario','controllerUsuarios');
 Route::apiResource('Vuelos','controllerVuelos');

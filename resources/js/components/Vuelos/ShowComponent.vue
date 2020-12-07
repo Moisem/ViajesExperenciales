@@ -181,6 +181,7 @@
     }
 </script>
 <style scoped>
+
 .cards h2.header {
   font-size: 40px;
   margin: 0 0 30px 0;

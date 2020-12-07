@@ -25,6 +25,9 @@ Route::get('/vuelos', function(){
 Route::get('/domicilio', function(){
     return view('domicilio.index');
 });
+Route::get('/usuarios', function(){
+    return view('usuarios.index');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
