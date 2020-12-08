@@ -36,17 +36,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-<<<<<<< HEAD
                         @auth
-                        <li><a class="nav-item nav-link" href="">Usuarios</a></li>
+                        <li><a class="nav-item nav-link" href="{{route('usuarios')}}">Usuarios</a></li>
 						<li><a class="nav-item nav-link" href="{{route('vuelos')}}" >Vuelos</a></li>
-						<li><a class="nav-item nav-link" href="" >Reservaciones</a></li>
-                        <li><a class="nav-item nav-link" href="" >Domicilios</a></li>
+						<li><a class="nav-item nav-link" href="{{route('reservaciones')}}" >Reservaciones</a></li>
+                        <li><a class="nav-item nav-link" href="{{route('domicilio')}}" >Domicilios</a></li>
                         @endauth
-=======
-                       
-                        
->>>>>>> bfead176ad2842b7104f3658e48e3a53c580301c
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

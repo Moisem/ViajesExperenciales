@@ -2269,15 +2269,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       usuarios: [],
-      usuarioedit: [],
-      usuariodelete: []
+      usuarioedit: []
     };
   },
   mounted: function mounted() {
@@ -40011,26 +40007,6 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "boton_delete",
-                    attrs: {
-                      "data-toggle": "modal",
-                      "data-target": "#deleteUsuario",
-                      type: "button"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteid(usuario)
-                      }
-                    }
-                  },
-                  [_vm._v("Eliminar")]
-                )
-              ]),
-              _vm._v(" "),
               _c("td")
             ])
           })
@@ -40246,9 +40222,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Telefono")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Editar")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Eliminar")])
+      _c("th", [_vm._v("Editar")])
     ])
   },
   function() {
@@ -53167,8 +53141,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://127.0.0.1:8000/api/';
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('Vuelos', __webpack_require__(/*! ./components/Vuelos/ShowComponent.vue */ "./resources/js/components/Vuelos/ShowComponent.vue")["default"]);
-Vue.component('Domicilio', __webpack_require__(/*! ./components/Domicilio/ShowComponent.vue */ "./resources/js/components/Domicilio/ShowComponent.vue")["default"]);
-Vue.component('Usuarios', __webpack_require__(/*! ./components/Usuarios/ShowComponent.vue */ "./resources/js/components/Usuarios/ShowComponent.vue")["default"]);
+Vue.component('Domicilios', __webpack_require__(/*! ./components/Domicilio/ShowComponent.vue */ "./resources/js/components/Domicilio/ShowComponent.vue")["default"]);
+Vue.component('Usuario', __webpack_require__(/*! ./components/Usuarios/ShowComponent.vue */ "./resources/js/components/Usuarios/ShowComponent.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });

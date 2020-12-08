@@ -19,27 +19,18 @@ Route::get('/', function () {
 Route::get('/forms', function(){
     return View::make('forms');
 });
-<<<<<<< HEAD
 Route::get('/vuelos', function(){
     return view('vuelos.index');
-});
+})->name("vuelos");
 Route::get('/domicilio', function(){
     return view('domicilio.index');
-});
+})->name('domicilio');
 Route::get('/usuarios', function(){
     return view('usuarios.index');
-});
-=======
-Route::get('/vuelos', function () {
-    return view('vuelos.index');
-});
-Route::get('/usuario', function () {
-    return view('usuarios.index');
-});
-Route::get('/domicilio', function () {
-    return view('domicilio.index');
-});
->>>>>>> bfead176ad2842b7104f3658e48e3a53c580301c
+})->name('usuarios');
 Auth::routes();
-
+Route::get('/reservaciones', function(){
+    return view('reservaciones.index');
+})->name('reservaciones');
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
