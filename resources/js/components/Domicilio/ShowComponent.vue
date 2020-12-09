@@ -34,7 +34,7 @@
             </div>
           </div>
           <!--  modal update -->
-                    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark  " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content border-dark " >
                                 <div class="modal-header border-dark">
@@ -88,9 +88,9 @@
                     </div>
           <!-- fin modal update -->
           <!-- modal delete -->
-                          <div class="modal fade" id="deleteDomicilio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade border-dark " id="deleteDomicilio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog border-dark" role="document">
-                                        <div class="modal-content ">
+                                        <div class="modal-content border-dark ">
                                                             <div class="modal-header border-dark">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Eliminar Domicilio</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -109,7 +109,7 @@
                             </div>
                 <!-- fin modal delete -->
                 <!-- modal create -->
-                    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark " id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                             <div class="modal-header border-dark">
@@ -122,39 +122,39 @@
                                 <form @submit.prevent="createDomcilio()">
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Id del Usuario:</label>
-                                    <input type="number" v-model="newdomicilio.users_id" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newdomicilio.users_id" class="form-control" placeholder="1" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Estado:</label>
-                                    <input type="text" v-model="newdomicilio.estado" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newdomicilio.estado" class="form-control" placeholder="Estado" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Municipio:</label>
-                                    <input type="text" v-model="newdomicilio.municipio" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newdomicilio.municipio" class="form-control" placeholder="Municipio" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Colonia:</label>
-                                    <input type="text" v-model="newdomicilio.colonia" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newdomicilio.colonia" class="form-control" placeholder="Colonia" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Codigo Postal:</label>
-                                    <input type="number" v-model="newdomicilio.codigo_postal" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newdomicilio.codigo_postal" class="form-control" placeholder="50000" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Calle:</label>
-                                    <input type="text" v-model="newdomicilio.calle" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newdomicilio.calle" class="form-control" placeholder="Calle" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Numero Interior:</label>
-                                    <input type="number" v-model="newdomicilio.numero_interior" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newdomicilio.numero_interior" placeholder="0" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Numero Exterior:</label>
-                                    <input type="number" v-model="newdomicilio.numero_exterior" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newdomicilio.numero_exterior" placeholder="0" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Referencias:</label>
-                                    <input type="text" v-model="newdomicilio.referencias" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newdomicilio.referencias" placeholder="Ejemplo: Casa de dos pisos" class="form-control" id="recipient-name">
                                 </div>
                                  <div class="modal-footer border-dark">
                                     <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
@@ -174,8 +174,11 @@
             return {
               //
               domicilios: [],
+              //
               domiciliodelete:[],
+              //
               domicilioedit:[],
+              //
               newdomicilio:{
                 estado:"",
                 municipio:"",
@@ -194,16 +197,18 @@
             console.log("se carga la API");
           },
           methods: {
-            //función para obtener vuelos
+            //función para obtener domicilios
             getDomicilio: function () {
               axios.get("Domicilio").then((response) => {
                 this.domicilios = response.data.domicilios;
                 console.log(this.domicilios);
               });
             },
+            //obtener id 
               updateid(id){
               this.domicilioedit = id;
             },
+            //editar domcilio
             editarDomcilio(){
                 let urlUpdate='Domicilio/'+ this.domicilioedit.id;
                 axios.put(urlUpdate,this.domicilioedit).then(response =>{
@@ -216,10 +221,11 @@
                 }).catch(error=>{
                 });
             },
-            
+            //obtener id
             deleteid(id) {
                 this.domiciliodelete = id;
             },
+            //eliminar domicilio
             deleteDomicilio(id) {
             let urldeleteDomcilio = "Domicilio/" + id;
             axios.delete(urldeleteDomcilio, this.domiciliodelete) .then((response) => {
@@ -231,6 +237,7 @@
             })
             .catch((error) => {});
         },
+        //nuevo domicilio
         createDomcilio(){
             let url="Domicilio";
             axios.post(url,this.newdomicilio).then(response=>{
@@ -245,7 +252,7 @@
                     this.newdomicilio.numero_interior="",
                     this.newdomicilio.numero_exterior="",
                     this.newdomicilio.referencias="",
-                    this.newdomicilio.users_id=""
+                    this.newdomicilio.users_id="",
                     $('#guardarModal').modal('hide');
                 }
             }).catch(error=>{

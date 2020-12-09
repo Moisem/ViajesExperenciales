@@ -1,6 +1,6 @@
 <template>
 <div>
-  <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Nueva Reservacion</i></button>
+  <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nueva Reservacion</i></button>
           <div class="row">
             <div class="col-sm" v-for="reservacion in reservaciones" :key="reservacion.id">
               <div class="cards">
@@ -26,10 +26,10 @@
             </div>
           </div>
           <!--  modal update -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                            <div class="modal-content border-dark ">
+                                <div class="modal-header border-dark ">
                                     <h5 class="modal-title" id="exampleModalLabel">Modificar Reservacion</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -38,28 +38,28 @@
                                 <div class="modal-body">
                                     <form @submit.prevent="editarReservacion()" >
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Estado:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">ID de Usuario:</label>
                                         <input type="text"  v-model="reservacionedit.users_id" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Estado:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Costo:</label>
                                         <input type="text"  v-model="reservacionedit.costo" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Municipio:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Fecha Salidad:</label>
                                         <input type="text"  v-model="reservacionedit.fecha_salida" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Colonia:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Fecha Regreso:</label>
                                         <input type="text"  v-model="reservacionedit.fecha_regreso" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label align="left"  for="recipient-name" class="col-form-label">Codigo Postal:</label>
+                                        <label align="left"  for="recipient-name" class="col-form-label">Acompañantes:</label>
                                         <input type="text"  v-model="reservacionedit.acompañantes" class="form-control" id="recipient-name">
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" name="action" class="btn btn-primary">Actualizar</button>                           
+                                    <div class="modal-footer border-dark ">
+                                        <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="action" class="boton_edit">Actualizar</button>                           
                                     </div>
                                     </form>
                                 </div>
@@ -68,10 +68,10 @@
                     </div>
           <!-- fin modal update -->
           <!-- modal delete -->
-                          <div class="modal fade" id="deleteReservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade border-dark " id="deleteReservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                                            <div class="modal-header">
+                                        <div class="modal-content border-dark ">
+                                                            <div class="modal-header border-dark ">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Eliminar Reservaciones</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -80,19 +80,19 @@
                                             <div class="modal-body">
                                                 <h4>¿Esta seguro que quieres eliminar la reservacion del usuario con id <span class="badge badge-pill badge-danger">{{reservaciondelete.users_id}}</span>?</h4>                         
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-danger" @click="deleteReservaciones(reservaciondelete.id)">Eliminar</button>
+                                            <div class="modal-footer border-dark ">
+                                                <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="boton_delete" @click="deleteReservaciones(reservaciondelete.id)">Eliminar</button>
                                             </div>
                                         </div>
                                 </div>
                             </div>
                 <!-- fin modal delete -->
                 <!-- modal create -->
-                    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark " id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-content border-dark ">
+                            <div class="modal-header border-dark ">
                                 <h5 class="modal-title" id="exampleModalLabel">Nueva Reservacion</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -101,28 +101,28 @@
                             <div class="modal-body">
                                 <form @submit.prevent="createReservaciones()">
                                 <div class="form-group">
-                                    <label align="left" for="recipient-name" class="col-form-label">Id del Usuario:</label>
-                                    <input type="number" v-model="newreservacion.users_id" class="form-control" id="recipient-name">
+                                    <label align="left" for="recipient-name" class="col-form-label">ID del Usuario:</label>
+                                    <input type="number" v-model="newreservacion.users_id" class="form-control" placeholder="1" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Costo:</label>
-                                    <input type="number" v-model="newreservacion.costo" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newreservacion.costo" class="form-control" placeholder="2000" id="recipient-name">
                                 </div>
                                 <div class="form-group">
-                                    <label align="left" for="recipient-name" class="col-form-label">fecha salida:</label>
-                                    <input type="date" v-model="newreservacion.fecha_salida" class="form-control" id="recipient-name">
+                                    <label align="left" for="recipient-name" class="col-form-label">Fecha salida:</label>
+                                    <input type="date" v-model="newreservacion.fecha_salida" class="form-control"  id="recipient-name">
                                 </div>
                                 <div class="form-group">
-                                    <label align="left" for="recipient-name" class="col-form-label">fecha regreso:</label>
-                                    <input type="date" v-model="newreservacion.fecha_regreso" class="form-control" id="recipient-name">
+                                    <label align="left" for="recipient-name" class="col-form-label">Fecha regreso:</label>
+                                    <input type="date" v-model="newreservacion.fecha_regreso" class="form-control"  id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Acompañantes:</label>
-                                    <input type="number" v-model="newreservacion.acompañantes" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newreservacion.acompañantes" placeholder="5" class="form-control" id="recipient-name">
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" name="action" class="btn btn-primary">Guardar</button>
+                                <div class="modal-footer border-dark ">
+                                    <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="action" class="boton_update">Guardar</button>
                                 </div>
                                 </form>
                             </div>
@@ -138,8 +138,11 @@
             return {
               //
               reservaciones: [],
+              //
               reservaciondelete:[],
+              //
               reservacionedit:[],
+              //
               newreservacion:{
                   costo:"",
                   fecha_salida:"",
@@ -154,16 +157,18 @@
             console.log("se carga la API");
           },
           methods: {
-            //función para obtener vuelos
+            //función para obtener Reservaciones
             getReservacion: function () {
               axios.get("Reservaciones").then((response) => {
                 this.reservaciones = response.data.reservaciones;
                 console.log(this.reservaciones);
               });
             },
+            //obtener id
               updateid(id){
               this.reservacionedit = id;
             },
+            //editar reservaciones
             editarReservacion(){
                 let urlUpdate='Reservaciones/'+ this.reservacionedit.id;
                 axios.put(urlUpdate,this.reservacionedit).then(response =>{
@@ -176,10 +181,11 @@
                 }).catch(error=>{
                 });
             },
-            
+            //obtener id
             deleteid(id) {
                 this.reservaciondelete = id;
             },
+            //eliminar reservaciones
             deleteReservaciones(id) {
             let urldeleteReservaciones = "Reservaciones/" + id;
             axios.delete(urldeleteReservaciones, this.reservaciondelete) .then((response) => {
@@ -191,6 +197,7 @@
             })
             .catch((error) => {});
         },
+        //nueva reservacion 
         createReservaciones(){
             let url="Reservaciones";
             axios.post(url,this.newreservacion).then(response=>{
@@ -274,40 +281,94 @@
 .content a:hover {
   border-radius: 4px;
 }
-.boton_edit{
-    text-decoration: none;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 15px;
-    font-style: italic;
-    color: #006558;
-    background-color: #82b085;
-    border-radius: 15px;
-    border: 3px double #dee9de;
-  }
-  .boton_edit:hover{
-    opacity: 0.6;
-    text-decoration: none;
-  }
-  .boton_delete{
-    text-decoration: none;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 15px;
-    font-style: italic;
-    color: #650000;
-    background-color: #a00527;
-    border-radius: 15px;
-    border: 3px double #f7faf7;
-  }
-  .boton_delete:hover{
-    opacity: 0.6;
-    text-decoration: none;
-    }
+.boton_edit {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #006558;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #dee9de;
+}
+.boton_edit:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_delete {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #650000;
+  background-color: #a00527;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_delete:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_create {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #f5f4fa;
+  background-color: #66a9ec;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_create:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_cancel {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #202020;
+  background-color: #eaec66;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_cancel:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_update {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color:  #3003cf;
+  background-color: #f0f0ef;
+  border-radius: 15px;
+  border: 3px double #3003cf;
+}
+.boton_update:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
 </style>

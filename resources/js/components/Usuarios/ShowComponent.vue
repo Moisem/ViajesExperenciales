@@ -25,10 +25,10 @@
       </table>
     </div>
     <!--  modal update -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                            <div class="modal-content border-dark ">
+                                <div class="modal-header border-dark ">
                                     <h5 class="modal-title" id="exampleModalLabel">Modificar Perfil de Usuario</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -52,7 +52,7 @@
                                         <label align="left" for="recipient-name" class="col-form-label">Telefono:</label>
                                         <input type="text"  v-model="usuarioedit.telefono" class="form-control" id="recipient-name">
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer border-dark ">
                                         <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" name="action" class="boton_edit">Actualizar</button>                           
                                     </div>
@@ -76,6 +76,7 @@
             this.getUsuarios();
             console.log("se carga la API");
           },
+          //mostrar usuarios
           methods: {
             getUsuarios: function () {
               axios.get("Usuario").then((response) => {
@@ -83,9 +84,11 @@
                 console.log(this.usuarios);
               });
             },
+            // obtener id
             updateid(id){
               this.usuarioedit = id;
             },
+            //editar usuario
             editarUsuario(){
                 let urlUpdate='Usuario/'+ this.usuarioedit.id;
                 axios.put(urlUpdate,this.usuarioedit).then(response =>{

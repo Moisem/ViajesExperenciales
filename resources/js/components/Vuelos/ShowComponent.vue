@@ -15,10 +15,10 @@
             </div>   
     </div>
     <!--  modal update -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade border-dark " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
+                            <div class="modal-content border-dark ">
+                                <div class="modal-header border-dark ">
                                     <h5 class="modal-title" id="exampleModalLabel">Modificar Vuelo</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -38,7 +38,7 @@
                                         <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
                                         <input type="text"  v-model="vueloedit.descripcion" class="form-control" id="recipient-name">
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer border-dark ">
                                         <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" name="action" class="boton_edit">Actualizar</button>                           
                                     </div>
@@ -49,20 +49,19 @@
                     </div>
                     <!-- fin modal update -->
                             <!-- modal delete -->
-                            <div class="modal fade" id="deletevuelos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade border-dark " id="deletevuelos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                                            <div class="modal-header">
+                                        <div class="modal-content border-dark ">
+                                                            <div class="modal-header border-dark ">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Eliminar Vuelo</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                             <div class="modal-body">
-                                                <h4>¿Quieres eliminar el vuelo a <span class="badge badge-pill badge-primary">{{vuelodelete.pais}}</span>?</h4>
-                                                <!--{{materiadelete}}-->                            
+                                                <h4>¿Quieres eliminar el vuelo a <span class="badge badge-pill badge-primary">{{vuelodelete.pais}}</span>?</h4>                         
                                             </div>
-                                            <div class="modal-footer">
+                                            <div class="modal-footer border-dark ">
                                                 <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
                                                 <button type="button" class="boton_delete" @click="deleteVuelo(vuelodelete.id)">Eliminar</button>
                                             </div>
@@ -71,10 +70,10 @@
                             </div>
                             <!-- fin modal delete -->
                     <!-- modal create -->
-                    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade border-dark " id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-content border-dark ">
+                            <div class="modal-header border-dark ">
                                 <h5 class="modal-title" id="exampleModalLabel">Nuevo Vuelo</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -94,11 +93,7 @@
                                     <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
                                     <input type="text" v-model="newvuelo.descripcion" class="form-control" id="recipient-name">
                                 </div>
-                                <div class="mb-3">
-                                    <label align="left" for="recipient-name" class="col-form-label">URL de Imagen:</label>
-                                    <input type="text" v-model="newvuelo.img" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer border-dark ">
                                     <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="action" class="boton_update">Guardar</button>
                                 </div>
@@ -125,7 +120,6 @@ export default {
         pais: "",
         ciudad: "",
         descripcion: "",
-        img: "",
       },
       errors:[],
     };
@@ -194,7 +188,6 @@ export default {
             (this.newvuelo.pais = ""),
               (this.newvuelo.ciudad = ""),
               (this.newvuelo.descripcion = ""),
-              (this.newvuelo.img = "");
             $("#guardarModal").modal("hide");
           }
         })
