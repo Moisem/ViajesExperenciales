@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Detalle_reservacion extends Model
 {
     protected $tabla='detalle_reservacion';
-    protected $guarded=['id'];
-    protected $fillable=['estado', 'vuelos_id', 'reservacion_id'];
+    protected $fillable=['estado', 'vuelos_id', 'reservaciones_id'];
     public function reservaciones()
     {
         return $this->belongsTo(Reservaciones::class);

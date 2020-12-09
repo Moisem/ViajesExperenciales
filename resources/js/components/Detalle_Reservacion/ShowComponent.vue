@@ -6,10 +6,12 @@
               <table class="table table-dark table-striped">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>ID</th>
                         <th>Estado</th>
-                        <th>Vuelo</th>
-                        <th>Reservacion id</th>
+                        <th>Vuelo ID</th>
+                        <th>Reservacion ID</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,6 +20,12 @@
                         <td v-text="detalle.estado"></td>
                         <td v-text="detalle.vuelos_id"></td>
                         <td v-text="detalle.reservaciones_id"></td>
+                        <td>
+               <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(detalle)">Editar</a>
+          </td>
+          <td>
+               <a data-toggle="modal" data-target="#deleteReservaciones" type="button" class="boton_delete" v-on:click="deleteid(detalle)" >Eliminar</a>
+          </td>
                     </tr>
                 </tbody>
                 </table>

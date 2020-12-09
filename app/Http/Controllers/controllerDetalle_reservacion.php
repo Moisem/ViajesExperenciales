@@ -18,8 +18,8 @@ class controllerDetalle_reservacion extends Controller
     }
     public function index()
     {
-        $detalle = Detalle_reservacion::all();
-        return response()->json(['detalle'=>$detalle]);
+        $detalles = Detalle_reservacion::all();
+        return response()->json(['detalles'=>$detalles]);
     }
 
     /**
