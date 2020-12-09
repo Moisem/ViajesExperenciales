@@ -79,20 +79,20 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form @submit.prevent="createVuelo()">
-                                <div class="form-group">
+                                <form @submit.prevent="createVuelo()" >    
+                                <div class="mb-3">
                                     <label align="left" for="recipient-name" class="col-form-label">Pais:</label>
-                                    <input type="text" v-model="newvuelo.pais" class="form-control" id="recipient-name">
+                                    <input type="text" v-model="newvuelo.pais" :state="false" class="form-control" id="recipient-name">
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label align="left" for="recipient-name" class="col-form-label">Ciudad:</label>
                                     <input type="text" v-model="newvuelo.ciudad" class="form-control" id="recipient-name">
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label align="left" for="recipient-name" class="col-form-label">Descripcion:</label>
                                     <input type="text" v-model="newvuelo.descripcion" class="form-control" id="recipient-name">
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label align="left" for="recipient-name" class="col-form-label">URL de Imagen:</label>
                                     <input type="text" v-model="newvuelo.img" class="form-control" id="recipient-name">
                                 </div>
@@ -112,128 +112,153 @@
 </div>
 </template>
 <script>
-    export default {
-        data (){
-            return{
-                //show vuelos
-                vuelos: [],
-                //update vuelos
-                vueloedit: [],
-                //delete vuelos
-                vuelodelete: [],
-                //nuevo vuelo
-                newvuelo:{
-                    pais:"",
-                    ciudad:"",
-                    descripcion:"",
-                    img:"",
-                    },
-                }
-            },
-        mounted() {
-            this.getVuelos();
-            console.log('se carga la API')
-        },
-        methods: {
-            //función para obtener vuelos
-            getVuelos: function () {
-                 axios.get('Vuelos').then(response => {
-                    this.vuelos = response.data.vuelos
-                    console.log (this.vuelos);
-                });
-            },
-            //función para obtener el id
-            updateid(id){
-                this.vueloedit = id;
-            },
-            //función para editar Vuelos
-            editarVuelos(){
-                let urlUpdate='Vuelos/'+ this.vueloedit.id;
-                axios.put(urlUpdate,this.vueloedit).then(response =>{
-                if(response.data.error){
-                    consolo.log("ocurrio un error");
-                    } else {
-                console.log("Se Actualizo de manera correctamente");
-                    $('#exampleModal').modal('hide')
-                }
-                }).catch(error=>{
-                });
-            },
-            //función para eliminir Vuelos
-            deleteid(id) {
-                this.vuelodelete = id;
-            },
-            deleteVuelo(id) {
-            let urldeleteVuelo = "Vuelos/" + id;
-            axios.delete(urldeleteVuelo, this.vuelodelete) .then((response) => {
+export default {
+  data() {
+    return {
+      //show vuelos
+      vuelos: [],
+      //update vuelos
+      vueloedit: [],
+      //delete vuelos
+      vuelodelete: [],
+      //nuevo vuelo
+      newvuelo: {
+        pais: "",
+        ciudad: "",
+        descripcion: "",
+        img: "",
+      },
+      errors:[],
+    };
+  },
+  mounted() {
+    this.getVuelos();
+    console.log("se carga la API");
+  },
+  computed:{
+      comprobar(){
+         return this.newvuelo.pais.length = null ? false : true
+      }
+  },
+  methods: {
+    //función para obtener vuelos
+    getVuelos: function () {
+      axios.get("Vuelos").then((response) => {
+        this.vuelos = response.data.vuelos;
+        console.log(this.vuelos);
+      });
+    },
+    //función para obtener el id
+    updateid(id) {
+      this.vueloedit = id;
+    },
+    //función para editar Vuelos
+    editarVuelos() {
+      let urlUpdate = "Vuelos/" + this.vueloedit.id;
+      axios
+        .put(urlUpdate, this.vueloedit)
+        .then((response) => {
+          if (response.data.error) {
+            consolo.log("ocurrio un error");
+          } else {
+            console.log("Se Actualizo de manera correctamente");
+            $("#exampleModal").modal("hide");
+          }
+        })
+        .catch((error) => {});
+    },
+    //función para eliminir Vuelos
+    deleteid(id) {
+      this.vuelodelete = id;
+    },
+    deleteVuelo(id) {
+      let urldeleteVuelo = "Vuelos/" + id;
+      axios
+        .delete(urldeleteVuelo, this.vuelodelete)
+        .then((response) => {
+          if (response.data.error) {
+            consolo.log("ocurrio un error");
+          } else {
+            console.log("se elimino de manera correctamente");
+            $("#deletevuelos").modal("hide");
+          }
+        })
+        .catch((error) => {});
+    },
+    //nuevo vuelo
+    createVuelo() {
+      let url = "Vuelos";
+      axios.post(url, this.newvuelo).then((response) => {
             if (response.data.error) {
-                consolo.log("ocurrio un error");
-            } else {
-                console.log("se elimino de manera correctamente");
-                $('#deletevuelos').modal('hide')
-            }
-            })
-            .catch((error) => {});
-        },
-        //nuevo vuelo
-        createVuelo(){
-            let url="Vuelos";
-            axios.post(url,this.newvuelo).then(response=>{
-                if(response.data.error ){
-                    console.log("ocurrio un error al guarda");
-                }else{
-                    this.newvuelo.pais="",this.newvuelo.ciudad="",this.newvuelo.descripcion="",this.newvuelo.img="";
-                    $('#guardarModal').modal('hide');
-                }
-            }).catch(error=>{
-               console.log("ocurrio un error al guarda"); 
-            });
-        },
-    }
-}
+            console.log("ocurrio un error al guarda");
+          } else {
+            (this.newvuelo.pais = ""),
+              (this.newvuelo.ciudad = ""),
+              (this.newvuelo.descripcion = ""),
+              (this.newvuelo.img = "");
+            $("#guardarModal").modal("hide");
+          }
+        })
+        .catch((error) => {
+          console.log("ocurrio un error al guarda");
+        });
+    },
+  },
+};
 </script>
 <style scoped>
-
 .cards h2.header {
   font-size: 40px;
   margin: 0 0 30px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.boton_edit{
-    text-decoration: none;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 15px;
-    font-style: italic;
-    color: #006558;
-    background-color: #82b085;
-    border-radius: 15px;
-    border: 3px double #dee9de;
-  }
-  .boton_edit:hover{
-    opacity: 0.6;
-    text-decoration: none;
-  }
-  .boton_delete{
-    text-decoration: none;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 15px;
-    font-style: italic;
-    color: #650000;
-    background-color: #a00527;
-    border-radius: 15px;
-    border: 3px double #f7faf7;
-  }
-  .boton_delete:hover{
-    opacity: 0.6;
-    text-decoration: none;
-  }
+.boton_edit {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #006558;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #dee9de;
+}
+.boton_edit:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_delete {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #650000;
+  background-color: #a00527;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_delete:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.errors{
+		background-color: #fcc;
+		border: 1px solid #966;
+	}
+	form{
+		margin-top: 20px;
+		line-height: 1.5em;
+	}
+	label{
+		display: inline-block;
+		width: 120px;
+	}
 </style>

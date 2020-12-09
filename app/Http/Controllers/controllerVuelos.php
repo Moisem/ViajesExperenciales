@@ -40,6 +40,10 @@ class controllerVuelos extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'pais' => 'required|max:255',
+            'ciudad' => 'required',
+        ]);
         $vuelo = $this->vuelo->create($request->all());
             return;
     }

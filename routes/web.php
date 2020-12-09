@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get('Usuarios','controllerUsuarios@index');
-
+Auth::routes();
 Route::get('/forms', function(){
     return View::make('forms');
 });
@@ -28,9 +28,8 @@ Route::get('/domicilio', function(){
 Route::get('/usuarios', function(){
     return view('usuarios.index');
 })->name('usuarios');
-Auth::routes();
 Route::get('/reservaciones', function(){
     return view('reservaciones.index');
 })->name('reservaciones');
-Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');

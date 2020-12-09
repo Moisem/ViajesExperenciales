@@ -16,16 +16,11 @@ class controllerDomicilio extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
 
-   
-=======
-/*
     public function page(){
         return view('domicilio.index');
     }
-    */
->>>>>>> bfead176ad2842b7104f3658e48e3a53c580301c
+
     public function index()
     {
         $domicilios = Domicilio::all();
