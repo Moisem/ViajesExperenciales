@@ -40,6 +40,7 @@
                         <li><a class="nav-item nav-link" href="{{route('usuarios')}}">Usuarios</a></li>
 						<li><a class="nav-item nav-link" href="{{route('vuelos')}}" >Vuelos</a></li>
 						<li><a class="nav-item nav-link" href="{{route('reservaciones')}}" >Reservaciones</a></li>
+                        <li><a class="nav-item nav-link" href="{{route('detalle')}}" >Detalles</a></li>
                         <li><a class="nav-item nav-link" href="{{route('domicilio')}}" >Domicilios</a></li>
                         @endauth
                     </ul>

@@ -1,15 +1,13 @@
 <template>
   <div>
     <div >
-      <div></div>
-
       <table class="table table-dark table-striped">
         <tr>
           <th>Nombre</th>
           <th>Apellido  Paterno</th>
           <th>Apellido  Materno</th>
           <th>Email</th>
-          <th>Telefono</th>
+          <th>Telefono</th> 
           <th>Editar</th>
         </tr>
         <tr v-for="usuario in usuarios" :key="usuario.id">
