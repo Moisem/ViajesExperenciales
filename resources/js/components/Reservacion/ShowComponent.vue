@@ -197,11 +197,11 @@
                 if(response.data.error ){
                     console.log("ocurrio un error al guarda");
                 }else{
-                    thi.newreservacion.costo="",
-                    thi.newreservacion.fecha_salida="",
-                    thi.newreservacion.fecha_regreso="",
-                    thi.newreservacion.acompañantes="",
-                    thi.newreservacion.users_id="",
+                    this.newreservacion.costo="",
+                    this.newreservacion.fecha_salida="",
+                    this.newreservacion.fecha_regreso="",
+                    this.newreservacion.acompañantes="",
+                    this.newreservacion.users_id=""
                     $('#guardarModal').modal('hide');
                 }
             }).catch(error=>{

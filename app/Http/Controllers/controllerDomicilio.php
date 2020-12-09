@@ -17,9 +17,6 @@ class controllerDomicilio extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function page(){
-        return view('domicilio.index');
-    }
 
     public function index()
     {

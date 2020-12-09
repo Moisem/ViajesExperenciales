@@ -251,7 +251,7 @@
             }).catch(error=>{
                console.log("ocurrio un error al guarda"); 
             });
-        },
+        }, 
           },
         };
 </script>
