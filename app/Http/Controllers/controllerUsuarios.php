@@ -43,7 +43,7 @@ class controllerUsuarios extends Controller
      */
     public function store(Request $request)
     {
-        $usuario = new Usuarios;
+        $usuario = new Users;
         $usuario->create($request->all());
         return response()->json($usuario);
     }
@@ -56,7 +56,7 @@ class controllerUsuarios extends Controller
      */
     public function show($id)
     {
-        $id_us=Usuarios::find($id);
+        $id_us=Users::find($id);
         return ($id_us);
     }
 

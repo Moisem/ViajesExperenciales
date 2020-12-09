@@ -11,10 +11,15 @@ class controllerDetalle_reservacion extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct (Detalle_reservacion $detalle) {
+        $this->detalle = $detalle;
+        //$this->middleware('auth');
+ 
+    }
     public function index()
     {
         $detalle = Detalle_reservacion::all();
-        return response()->json($detalle);
+        return response()->json(['detalle'=>$detalle]);
     }
 
     /**
@@ -34,10 +39,9 @@ class controllerDetalle_reservacion extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $detalle = new Detalle_reservacion;
-        $detalle->create($request->all());
-        return response()->json($request);
+    {   
+        $detalle = $this->detalle->create($request->all());
+        return;
     }
 
     /**
@@ -74,6 +78,7 @@ class controllerDetalle_reservacion extends Controller
     {
         Detalle_reservacion::find($id)->update($request->all());
         return  $request->all();
+        
     }
 
     /**

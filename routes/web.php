@@ -31,5 +31,7 @@ Route::get('/usuarios', function(){
 Route::get('/reservaciones', function(){
     return view('reservaciones.index');
 })->name('reservaciones');
-
+Route::get('/detalles', function(){
+    return view('detalles_reservacion.index');
+})->name('detalle');
 Route::get('/home', 'HomeController@index')->name('home');

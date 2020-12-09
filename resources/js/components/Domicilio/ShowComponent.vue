@@ -1,6 +1,7 @@
 <template>
 <div>
-  <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nuevo Domicilio</i></button>
+  <button data-toggle="modal" data-target="#
+  " type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nuevo Domicilio</i></button>
           <div class="row">
             <div class="col-sm" v-for="domicilio in domicilios" :key="domicilio.id">
               <div class="cards">
