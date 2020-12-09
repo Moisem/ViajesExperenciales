@@ -8,18 +8,18 @@
                 <div class="content content-1" >
                   <div class="fab fa-twitter"></div>
                   <h2>Reservaciones</h2>
-                  <h4 align="left">Usuarios:</h4>
+                  <h4 align="left">Usuario:</h4>
                   <h3 v-text="reservacion.users_id">Estado:</h3>
-                  <h4 align="left">Estado:</h4>
+                  <h4 align="left">Costo:</h4>
                   <h3 v-text="reservacion.costo">Estado:</h3>
-                  <h4 align="left">Municipio:</h4>
+                  <h4 align="left">Fecha de salida:</h4>
                   <h3 v-text="reservacion.fecha_salida"></h3>
-                  <h4 align="left">Colonia:</h4>
-                  <h3 v-text="reservacion.fecha_salida"></h3>
-                  <h4 align="left">Codigo Postal:</h4>
+                  <h4 align="left">Fecha de regreso:</h4>
+                  <h3 v-text="reservacion.fecha_regreso"></h3>
+                  <h4 align="left">Acompañantes:</h4>
                   <h3 v-text="reservacion.acompañantes"></h3>
-                  <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(domicilio)">Editar</a>
-                  <a data-toggle="modal" data-target="#deleteReservaciones" type="button" class="boton_delete" v-on:click="deleteid(domicilio)" >Eliminar</a>
+                  <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(reservacion)">Editar</a>
+                  <a data-toggle="modal" data-target="#deleteReservaciones" type="button" class="boton_delete" v-on:click="deleteid(reservacion)" >Eliminar</a>
                 </div>
               </div>
             </div>
@@ -102,11 +102,11 @@
                                 <form @submit.prevent="createReservaciones()">
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Id del Usuario:</label>
-                                    <input type="text" v-model="newreservacion.users_id" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newreservacion.users_id" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Costo:</label>
-                                    <input type="text" v-model="newreservacion.costo" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newreservacion.costo" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">fecha salida:</label>
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label align="left" for="recipient-name" class="col-form-label">Acompañantes:</label>
-                                    <input type="text" v-model="newreservacion.acompañantes" class="form-control" id="recipient-name">
+                                    <input type="number" v-model="newreservacion.acompañantes" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -150,12 +150,12 @@
             };
           },
           mounted() {
-            this.getReservaciones();
+            this.getReservacion();
             console.log("se carga la API");
           },
           methods: {
             //función para obtener vuelos
-            getReservaciones: function () {
+            getReservacion: function () {
               axios.get("Reservaciones").then((response) => {
                 this.reservaciones = response.data.reservaciones;
                 console.log(this.reservaciones);
@@ -201,7 +201,7 @@
                     thi.newreservacion.fecha_salida="",
                     thi.newreservacion.fecha_regreso="",
                     thi.newreservacion.acompañantes="",
-                    thi.newreservacion.users_id=""
+                    thi.newreservacion.users_id="",
                     $('#guardarModal').modal('hide');
                 }
             }).catch(error=>{

@@ -1,19 +1,21 @@
 <template>
   <div>
-      <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
+      <button data-toggle="modal" data-target="#guardarModal" type="button" class="boton_create"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
     <div class="row">
             <div class="col-sm"  v-for="vuelo in vuelos" :key="vuelo.id">
-                <div class="card text-center" style="width: 18rem; margin-top: 40px" >
-                    <div class="card-body">
-                        <h5 class="card-title" v-text="vuelo.pais"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" v-text="vuelo.ciudad"></h6>
-                        <p class="card-text" v-text="vuelo.descripcion"></p>
+                <div  class="card text-center text-white  bg-dark mb-3" style="width: 18rem; margin-top: 40px" >
+                    <div class="card-body text-white">
+                        <h5 class="card-title text-white" v-text="vuelo.pais"></h5>
+                        <h6 class="card-subtitle mb-2 text-white" v-text="vuelo.ciudad"></h6>
+                        <p class="card-text text-white" v-text="vuelo.descripcion"></p>
                         <a data-toggle="modal" data-target="#exampleModal" type="button" class="boton_edit" v-on:click="updateid(vuelo)">Editar</a>
                         <a data-toggle="modal" data-target="#deletevuelos" type="button" class="boton_delete" v-on:click="deleteid(vuelo)" >Eliminar</a>
-                        
-                    </div>
-                    <!--  modal update -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    </div>  
+                </div>
+            </div>   
+    </div>
+    <!--  modal update -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -37,8 +39,8 @@
                                         <input type="text"  v-model="vueloedit.descripcion" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" name="action" class="btn btn-primary">Actualizar</button>                           
+                                        <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="action" class="boton_edit">Actualizar</button>                           
                                     </div>
                                     </form>
                                 </div>
@@ -57,12 +59,12 @@
                                                                 </button>
                                                             </div>
                                             <div class="modal-body">
-                                                <h4>¿Quieres eliminar el vuelo a<span class="badge badge-pill badge-primary">{{vuelodelete.pais}}</span>?</h4>
+                                                <h4>¿Quieres eliminar el vuelo a <span class="badge badge-pill badge-primary">{{vuelodelete.pais}}</span>?</h4>
                                                 <!--{{materiadelete}}-->                            
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-danger" @click="deleteVuelo(vuelodelete.id)">Eliminar</button>
+                                                <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="boton_delete" @click="deleteVuelo(vuelodelete.id)">Eliminar</button>
                                             </div>
                                         </div>
                                 </div>
@@ -97,8 +99,8 @@
                                     <input type="text" v-model="newvuelo.img" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" name="action" class="btn btn-primary">Guardar</button>
+                                    <button type="button" class="boton_cancel" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="action" class="boton_update">Guardar</button>
                                 </div>
                                 </form>
                             </div>
@@ -106,9 +108,6 @@
                         </div>
                 </div>
                 <!-- fin modal create -->
-                </div>
-            </div>   
-    </div>
 </div>
 </template>
 <script>
@@ -249,16 +248,58 @@ export default {
   opacity: 0.6;
   text-decoration: none;
 }
-.errors{
-		background-color: #fcc;
-		border: 1px solid #966;
-	}
-	form{
-		margin-top: 20px;
-		line-height: 1.5em;
-	}
-	label{
-		display: inline-block;
-		width: 120px;
-	}
+.boton_create {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #f5f4fa;
+  background-color: #66a9ec;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_create:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_cancel {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color: #202020;
+  background-color: #eaec66;
+  border-radius: 15px;
+  border: 3px double #f7faf7;
+}
+.boton_cancel:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+.boton_update {
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  color:  #3003cf;
+  background-color: #f0f0ef;
+  border-radius: 15px;
+  border: 3px double #3003cf;
+}
+.boton_update:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
 </style>

@@ -21,8 +21,8 @@ class controllerReservaciones extends Controller
     }
     public function index()
     {
-        $reservacion = Reservaciones::all();
-        return response()->json($reservacion);
+        $reservaciones = Reservaciones::all();
+        return response()->json(['reservaciones'=> $reservaciones]);
     }
 
     /**
@@ -43,9 +43,8 @@ class controllerReservaciones extends Controller
      */
     public function store(Request $request)
     {
-        $reservacion = new Reservaciones;
-        $reservacion->create($request->all());
-        return response()->json($request);
+        $reservacion = $this->reservacion->create($request->all());
+        return;
     }
 
     /**
