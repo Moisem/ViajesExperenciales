@@ -14,7 +14,6 @@ class controllerReservaciones extends Controller
 
     public function __construct (Reservaciones $reservacion) {
         $this->reservacion = $reservacion;
-        $this->middleware('auth');
  
     }
     public function page() {

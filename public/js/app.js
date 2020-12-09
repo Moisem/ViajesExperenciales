@@ -2192,6 +2192,224 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      //
+      reservaciones: [],
+      reservaciondelete: [],
+      reservacionedit: [],
+      newreservacion: {
+        costo: "",
+        fecha_salida: "",
+        fecha_regreso: "",
+        acompañantes: "",
+        users_id: ""
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.getReservaciones();
+    console.log("se carga la API");
+  },
+  methods: {
+    //función para obtener vuelos
+    getReservaciones: function getReservaciones() {
+      var _this = this;
+
+      axios.get("Reservaciones").then(function (response) {
+        _this.reservaciones = response.data.reservaciones;
+        console.log(_this.reservaciones);
+      });
+    },
+    updateid: function updateid(id) {
+      this.reservacionedit = id;
+    },
+    editarReservacion: function editarReservacion() {
+      var urlUpdate = 'Reservaciones/' + this.reservacionedit.id;
+      axios.put(urlUpdate, this.reservacionedit).then(function (response) {
+        if (response.data.error) {
+          consolo.log("ocurrio un error");
+        } else {
+          console.log("Se Actualizo de manera correctamente");
+          $('#exampleModal').modal('hide');
+        }
+      })["catch"](function (error) {});
+    },
+    deleteid: function deleteid(id) {
+      this.reservaciondelete = id;
+    },
+    deleteReservaciones: function deleteReservaciones(id) {
+      var urldeleteReservaciones = "Reservaciones/" + id;
+      axios["delete"](urldeleteReservaciones, this.reservaciondelete).then(function (response) {
+        if (response.data.error) {
+          consolo.log("ocurrio un error");
+        } else {
+          console.log("se elimino de manera correctamente");
+        }
+      })["catch"](function (error) {});
+    },
+    createReservaciones: function createReservaciones() {
+      var url = "Reservaciones";
+      axios.post(url, this.newreservacion).then(function (response) {
+        if (response.data.error) {
+          console.log("ocurrio un error al guarda");
+        } else {
+          thi.newreservacion.costo = "", thi.newreservacion.fecha_salida = "", thi.newreservacion.fecha_regreso = "", thi.newreservacion.acompañantes = "", thi.newreservacion.users_id = "";
+          $('#guardarModal').modal('hide');
+        }
+      })["catch"](function (error) {
+        console.log("ocurrio un error al guarda");
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=script&lang=js& ***!
@@ -2445,19 +2663,25 @@ __webpack_require__.r(__webpack_exports__);
         ciudad: "",
         descripcion: "",
         img: ""
-      }
+      },
+      errors: []
     };
   },
   mounted: function mounted() {
     this.getVuelos();
-    console.log('se carga la API');
+    console.log("se carga la API");
+  },
+  computed: {
+    comprobar: function comprobar() {
+      return this.newvuelo.pais.length = null ? undefined : true;
+    }
   },
   methods: {
     //función para obtener vuelos
     getVuelos: function getVuelos() {
       var _this = this;
 
-      axios.get('Vuelos').then(function (response) {
+      axios.get("Vuelos").then(function (response) {
         _this.vuelos = response.data.vuelos;
         console.log(_this.vuelos);
       });
@@ -2468,13 +2692,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     //función para editar Vuelos
     editarVuelos: function editarVuelos() {
-      var urlUpdate = 'Vuelos/' + this.vueloedit.id;
+      var urlUpdate = "Vuelos/" + this.vueloedit.id;
       axios.put(urlUpdate, this.vueloedit).then(function (response) {
         if (response.data.error) {
           consolo.log("ocurrio un error");
         } else {
           console.log("Se Actualizo de manera correctamente");
-          $('#exampleModal').modal('hide');
+          $("#exampleModal").modal("hide");
         }
       })["catch"](function (error) {});
     },
@@ -2489,7 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
           consolo.log("ocurrio un error");
         } else {
           console.log("se elimino de manera correctamente");
-          $('#deletevuelos').modal('hide');
+          $("#deletevuelos").modal("hide");
         }
       })["catch"](function (error) {});
     },
@@ -2503,7 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log("ocurrio un error al guarda");
         } else {
           _this2.newvuelo.pais = "", _this2.newvuelo.ciudad = "", _this2.newvuelo.descripcion = "", _this2.newvuelo.img = "";
-          $('#guardarModal').modal('hide');
+          $("#guardarModal").modal("hide");
         }
       })["catch"](function (error) {
         console.log("ocurrio un error al guarda");
@@ -6961,6 +7185,25 @@ exports.push([module.i, "\n.cards {\r\n  max-width: 400px;\r\n  margin: 0 auto;\
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,800|Poppins&display=swap);", ""]);
+
+// module
+exports.push([module.i, "\n.cards {\r\n  max-width: 400px;\r\n  margin: 0 auto;\r\n  text-align: center;\r\n  padding: 10px;\n}\n.cards h2.header {\r\n  font-size: 20px;\r\n  margin: 0 0 10px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.services {\r\n  display: flex;\r\n  align-items: center;\n}\n.content {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  flex: 1;\r\n  margin: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n  border-radius: 4px;\r\n  transition: all 0.3s ease;\n}\n.content .fab {\r\n  font-size: 70px;\r\n  margin: 5px 0;\n}\n.content > * {\r\n  flex: 1 1 100%;\n}\n.content h2 {\r\n  font-size: 12px;\r\n  margin: 8px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h4 {\r\n  font-size: 10px;\r\n  margin: 5px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h3 {\r\n  font-size: 9px;\r\n  margin: 3px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content p {\r\n  font-size: 9px;\r\n  font-family: \"Poppins\", sans-serif;\r\n  text-transform: uppercase;\n}\n.content a:hover {\r\n  border-radius: 4px;\n}\n.boton_edit{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #006558;\r\n    background-color: #82b085;\r\n    border-radius: 15px;\r\n    border: 3px double #dee9de;\n}\n.boton_edit:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\n.boton_delete{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #650000;\r\n    background-color: #a00527;\r\n    border-radius: 15px;\r\n    border: 3px double #f7faf7;\n}\n.boton_delete:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -6992,7 +7235,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.cards h2.header[data-v-2abc5886] {\r\n  font-size: 40px;\r\n  margin: 0 0 30px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.boton_edit[data-v-2abc5886]{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #006558;\r\n    background-color: #82b085;\r\n    border-radius: 15px;\r\n    border: 3px double #dee9de;\n}\n.boton_edit[data-v-2abc5886]:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\n.boton_delete[data-v-2abc5886]{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #650000;\r\n    background-color: #a00527;\r\n    border-radius: 15px;\r\n    border: 3px double #f7faf7;\n}\n.boton_delete[data-v-2abc5886]:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.cards h2.header[data-v-2abc5886] {\r\n  font-size: 40px;\r\n  margin: 0 0 30px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.boton_edit[data-v-2abc5886] {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #006558;\r\n  background-color: #82b085;\r\n  border-radius: 15px;\r\n  border: 3px double #dee9de;\n}\n.boton_edit[data-v-2abc5886]:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_delete[data-v-2abc5886] {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #650000;\r\n  background-color: #a00527;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_delete[data-v-2abc5886]:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.errors[data-v-2abc5886]{\r\n\t\tbackground-color: #fcc;\r\n\t\tborder: 1px solid #966;\n}\nform[data-v-2abc5886]{\r\n\t\tmargin-top: 20px;\r\n\t\tline-height: 1.5em;\n}\nlabel[data-v-2abc5886]{\r\n\t\tdisplay: inline-block;\r\n\t\twidth: 120px;\n}\r\n", ""]);
 
 // exports
 
@@ -38188,6 +38431,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShowComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Usuarios/ShowComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -39332,7 +39605,7 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("h4", [
                   _vm._v(
-                    "¿Esta seguro que quieres eliminar el domcilio de usuario"
+                    "¿Esta seguro que quieres eliminar el domcilio del usuario con id "
                   ),
                   _c("span", { staticClass: "badge badge-pill badge-danger" }, [
                     _vm._v(_vm._s(_vm.domiciliodelete.users_id))
@@ -39826,7 +40099,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Eliminar Materia")]
+        [_vm._v("Eliminar Domicilio")]
       ),
       _vm._v(" "),
       _c(
@@ -39937,6 +40210,784 @@ var staticRenderFns = [
           ])
         ])
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.reservaciones, function(reservacion) {
+        return _c("div", { key: reservacion.id, staticClass: "col-sm" }, [
+          _c("div", { staticClass: "cards" }, [
+            _c("div", { staticClass: "services" }, [
+              _c("div", { staticClass: "content content-1" }, [
+                _c("div", { staticClass: "fab fa-twitter" }),
+                _vm._v(" "),
+                _c("h2", [_vm._v("Reservaciones")]),
+                _vm._v(" "),
+                _c("h4", { attrs: { align: "left" } }, [_vm._v("Usuarios:")]),
+                _vm._v(" "),
+                _c(
+                  "h3",
+                  { domProps: { textContent: _vm._s(reservacion.users_id) } },
+                  [_vm._v("Estado:")]
+                ),
+                _vm._v(" "),
+                _c("h4", { attrs: { align: "left" } }, [_vm._v("Estado:")]),
+                _vm._v(" "),
+                _c(
+                  "h3",
+                  { domProps: { textContent: _vm._s(reservacion.costo) } },
+                  [_vm._v("Estado:")]
+                ),
+                _vm._v(" "),
+                _c("h4", { attrs: { align: "left" } }, [_vm._v("Municipio:")]),
+                _vm._v(" "),
+                _c("h3", {
+                  domProps: { textContent: _vm._s(reservacion.fecha_salida) }
+                }),
+                _vm._v(" "),
+                _c("h4", { attrs: { align: "left" } }, [_vm._v("Colonia:")]),
+                _vm._v(" "),
+                _c("h3", {
+                  domProps: { textContent: _vm._s(reservacion.fecha_salida) }
+                }),
+                _vm._v(" "),
+                _c("h4", { attrs: { align: "left" } }, [
+                  _vm._v("Codigo Postal:")
+                ]),
+                _vm._v(" "),
+                _c("h3", {
+                  domProps: { textContent: _vm._s(reservacion.acompañantes) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "boton_edit",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#exampleModal",
+                      type: "button"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateid(_vm.domicilio)
+                      }
+                    }
+                  },
+                  [_vm._v("Editar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "boton_delete",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#deleteReservaciones",
+                      type: "button"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteid(_vm.domicilio)
+                      }
+                    }
+                  },
+                  [_vm._v("Eliminar")]
+                )
+              ])
+            ])
+          ])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.editarReservacion()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Estado:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.reservacionedit.users_id,
+                            expression: "reservacionedit.users_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.reservacionedit.users_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.reservacionedit,
+                              "users_id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Estado:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.reservacionedit.costo,
+                            expression: "reservacionedit.costo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.reservacionedit.costo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.reservacionedit,
+                              "costo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Municipio:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.reservacionedit.fecha_salida,
+                            expression: "reservacionedit.fecha_salida"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.reservacionedit.fecha_salida },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.reservacionedit,
+                              "fecha_salida",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Colonia:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.reservacionedit.fecha_regreso,
+                            expression: "reservacionedit.fecha_regreso"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.reservacionedit.fecha_regreso },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.reservacionedit,
+                              "fecha_regreso",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Codigo Postal:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.reservacionedit.acompañantes,
+                            expression: "reservacionedit.acompañantes"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.reservacionedit.acompañantes },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.reservacionedit,
+                              "acompañantes",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "deleteReservaciones",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h4", [
+                  _vm._v(
+                    "¿Esta seguro que quieres eliminar la reservacion del usuario con id "
+                  ),
+                  _c("span", { staticClass: "badge badge-pill badge-danger" }, [
+                    _vm._v(_vm._s(_vm.reservaciondelete.users_id))
+                  ]),
+                  _vm._v("?")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteReservaciones(_vm.reservaciondelete.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Eliminar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "guardarModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.createReservaciones()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Id del Usuario:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newreservacion.users_id,
+                            expression: "newreservacion.users_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.newreservacion.users_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newreservacion,
+                              "users_id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Costo:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newreservacion.costo,
+                            expression: "newreservacion.costo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.newreservacion.costo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newreservacion,
+                              "costo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("fecha salida:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newreservacion.fecha_salida,
+                            expression: "newreservacion.fecha_salida"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", id: "recipient-name" },
+                        domProps: { value: _vm.newreservacion.fecha_salida },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newreservacion,
+                              "fecha_salida",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("fecha regreso:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newreservacion.fecha_regreso,
+                            expression: "newreservacion.fecha_regreso"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", id: "recipient-name" },
+                        domProps: { value: _vm.newreservacion.fecha_regreso },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newreservacion,
+                              "fecha_regreso",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { align: "left", for: "recipient-name" }
+                        },
+                        [_vm._v("Acompañantes:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newreservacion.acompañantes,
+                            expression: "newreservacion.acompañantes"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "recipient-name" },
+                        domProps: { value: _vm.newreservacion.acompañantes },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newreservacion,
+                              "acompañantes",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "justify-content-center btn btn-primary",
+        attrs: {
+          "data-toggle": "modal",
+          "data-target": "#guardarModal",
+          type: "button"
+        }
+      },
+      [
+        _c("i", { staticClass: "fas fa-plus-circle" }, [
+          _vm._v("Nueva Reservacion")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Modificar Reservacion")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancelar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", name: "action" }
+        },
+        [_vm._v("Actualizar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Eliminar Reservaciones")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Nueva Reservacion")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancelar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", name: "action" }
+        },
+        [_vm._v("Guardar")]
+      )
     ])
   }
 ]
@@ -40631,7 +41682,7 @@ var render = function() {
                               }
                             },
                             [
-                              _c("div", { staticClass: "form-group" }, [
+                              _c("div", { staticClass: "mb-3" }, [
                                 _c(
                                   "label",
                                   {
@@ -40654,7 +41705,11 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  attrs: { type: "text", id: "recipient-name" },
+                                  attrs: {
+                                    type: "text",
+                                    state: false,
+                                    id: "recipient-name"
+                                  },
                                   domProps: { value: _vm.newvuelo.pais },
                                   on: {
                                     input: function($event) {
@@ -40671,7 +41726,7 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "form-group" }, [
+                              _c("div", { staticClass: "mb-3" }, [
                                 _c(
                                   "label",
                                   {
@@ -40711,7 +41766,7 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "form-group" }, [
+                              _c("div", { staticClass: "mb-3" }, [
                                 _c(
                                   "label",
                                   {
@@ -40751,7 +41806,7 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "form-group" }, [
+                              _c("div", { staticClass: "mb-3" }, [
                                 _c(
                                   "label",
                                   {
@@ -53143,6 +54198,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('Vuelos', __webpack_require__(/*! ./components/Vuelos/ShowComponent.vue */ "./resources/js/components/Vuelos/ShowComponent.vue")["default"]);
 Vue.component('Domicilios', __webpack_require__(/*! ./components/Domicilio/ShowComponent.vue */ "./resources/js/components/Domicilio/ShowComponent.vue")["default"]);
 Vue.component('Usuario', __webpack_require__(/*! ./components/Usuarios/ShowComponent.vue */ "./resources/js/components/Usuarios/ShowComponent.vue")["default"]);
+Vue.component('Reservaciones', __webpack_require__(/*! ./components/Reservacion/ShowComponent.vue */ "./resources/js/components/Reservacion/ShowComponent.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -53345,6 +54401,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Reservacion/ShowComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/Reservacion/ShowComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowComponent.vue?vue&type=template&id=0d8c331a& */ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a&");
+/* harmony import */ var _ShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ShowComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Reservacion/ShowComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShowComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShowComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShowComponent.vue?vue&type=template&id=0d8c331a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reservacion/ShowComponent.vue?vue&type=template&id=0d8c331a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowComponent_vue_vue_type_template_id_0d8c331a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
