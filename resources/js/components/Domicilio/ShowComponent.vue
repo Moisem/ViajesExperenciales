@@ -1,9 +1,8 @@
 <template>
 <div>
-  <button data-toggle="modal" data-target="#
-  " type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nuevo Domicilio</i></button>
+  <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nuevo Domicilio</i></button>
           <div class="row">
-            <div class="col-sm" v-for="domicilio in domicilios" :key="domicilio.id">
+            <div class="col-sm" v-for="(domicilio, index) in domicilios" :key="index">
               <div class="cards">
               <div class="services" >
                 <div class="content content-1" >
@@ -214,12 +213,13 @@
                 let urlUpdate='Domicilio/'+ this.domicilioedit.id;
                 axios.put(urlUpdate,this.domicilioedit).then(response =>{
                 if(response.data.error){
-                    consolo.log("ocurrio un error");
+                    toastr.error("Ocurrio un error al actualizar el domicilio");
                     } else {
-                console.log("Se Actualizo de manera correctamente");
+                    toastr.info("Se Actualizo de manera correctamente");
                     $('#exampleModal').modal('hide')
                 }
                 }).catch(error=>{
+                  toastr.error("Ocurrio un error al actualizar el domicilio");
                 });
             },
             //obtener id
@@ -227,23 +227,25 @@
                 this.domiciliodelete = id;
             },
             //eliminar domicilio
-            deleteDomicilio(id) {
+            deleteDomicilio(id, index) {
             let urldeleteDomcilio = "Domicilio/" + id;
             axios.delete(urldeleteDomcilio, this.domiciliodelete) .then((response) => {
             if (response.data.error) {
-                consolo.log("ocurrio un error");
+                toastr.error("Ocurrio un  al eliminar el domicilio");
             } else {
-                console.log("se elimino de manera correctamente");
+                toastr.warning("se elimino de manera correctamente");
+                $('#deleteDomicilio').modal('hide');
+                this.domicilios.splice(index,1);
             }
             })
-            .catch((error) => {});
+            .catch((error) => { toastr.error("Ocurrio un  al eliminar el domicilio");});
         },
         //nuevo domicilio
         createDomcilio(){
             let url="Domicilio";
             axios.post(url,this.newdomicilio).then(response=>{
                 if(response.data.error ){
-                    console.log("ocurrio un error al guarda");
+                    toastr.error("Ocurrio un error al guardar");
                 }else{
                     this.newdomicilio.estado="",
                     this.newdomicilio.municipio="",
@@ -255,9 +257,11 @@
                     this.newdomicilio.referencias="",
                     this.newdomicilio.users_id="",
                     $('#guardarModal').modal('hide');
+                    toastr.success('El domicilio se guardo con exito');
+                
                 }
             }).catch(error=>{
-               console.log("ocurrio un error al guarda"); 
+               toastr.error("Ocurrio un error al guardar"); 
             });
         }, 
           },

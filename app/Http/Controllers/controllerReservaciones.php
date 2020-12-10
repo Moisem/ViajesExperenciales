@@ -16,9 +16,7 @@ class controllerReservaciones extends Controller
         $this->reservacion = $reservacion;
  
     }
-    public function page() {
-        return view('reservaciones.index');
-    }
+    
     public function index()
     {
         $reservaciones = Reservaciones::all();
@@ -29,7 +27,7 @@ class controllerReservaciones extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create()
     {
         //

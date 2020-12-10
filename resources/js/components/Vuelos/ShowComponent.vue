@@ -2,7 +2,7 @@
   <div>
       <button data-toggle="modal" data-target="#guardarModal" type="button" class="boton_create"><i class="fas fa-plus-circle">Insertar Vuelo</i></button>
     <div class="row">
-            <div class="col-sm"  v-for="vuelo in vuelos" :key="vuelo.id">
+            <div class="col-sm"  v-for="(vuelo, index) in vuelos" :key="index">
                 <div  class="card text-center text-white  bg-dark mb-3" style="width: 18rem; margin-top: 40px" >
                     <div class="card-body text-white">
                         <h5 class="card-title text-white" v-text="vuelo.pais"></h5>
@@ -129,9 +129,7 @@ export default {
     console.log("se carga la API");
   },
   computed:{
-      comprobar(){
-         return this.newvuelo.pais.length = null ? false : true
-      }
+
   },
   methods: {
     //función para obtener vuelos
@@ -152,9 +150,9 @@ export default {
         .put(urlUpdate, this.vueloedit)
         .then((response) => {
           if (response.data.error) {
-            consolo.log("ocurrio un error");
+            toastr.error("ocurrio un error");
           } else {
-            console.log("Se Actualizo de manera correctamente");
+            toastr.info("Se Actualizo de manera correctamente");
             $("#exampleModal").modal("hide");
           }
         })
@@ -164,35 +162,36 @@ export default {
     deleteid(id) {
       this.vuelodelete = id;
     },
-    deleteVuelo(id) {
+    deleteVuelo(id, index) {
       let urldeleteVuelo = "Vuelos/" + id;
-      axios
-        .delete(urldeleteVuelo, this.vuelodelete)
-        .then((response) => {
+      axios.delete(urldeleteVuelo, this.vuelodelete).then((response) => {
           if (response.data.error) {
-            consolo.log("ocurrio un error");
+            toastr.info("Ocurrio un error al eliminar el vuelo");
           } else {
-            console.log("se elimino de manera correctamente");
+            toastr.warning("Se elimino de manera correctamente");
             $("#deletevuelos").modal("hide");
+             this.vuelos.splice(index,1);
           }
         })
-        .catch((error) => {});
+        .catch((error) => { toastr.error("Ocurrio un error al eliminar el vuelo");
+        });
     },
     //nuevo vuelo
     createVuelo() {
       let url = "Vuelos";
       axios.post(url, this.newvuelo).then((response) => {
             if (response.data.error) {
-            console.log("ocurrio un error al guarda");
+            console.log("Ocurrio un error al guardar");
           } else {
-            (this.newvuelo.pais = ""),
-              (this.newvuelo.ciudad = ""),
-              (this.newvuelo.descripcion = ""),
+              this.newvuelo.pais = "",
+              this.newvuelo.ciudad = "",
+              this.newvuelo.descripcion = "",
             $("#guardarModal").modal("hide");
+             toastr.success("El vuelo se guardo de manera correcta");
           }
         })
         .catch((error) => {
-          console.log("ocurrio un error al guarda");
+          toastr.error("No se pudo guardar el vuelo");
         });
     },
   },

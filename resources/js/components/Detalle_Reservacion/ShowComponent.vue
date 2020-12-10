@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="detalle in detalles" :key="detalle.id">
+                    <tr v-for="(detalle, index) in detalles" :key="index">
                         <td v-text="detalle.id"></td>
                         <td v-text="detalle.estado"></td>
                         <td v-text="detalle.vuelos_id"></td>
@@ -160,9 +160,9 @@
                 let urlUpdate='Detalle_reservacion/'+ this.detalleedit.id;
                 axios.put(urlUpdate,this.detalleedit).then(response =>{
                 if(response.data.error){
-                    consolo.log("ocurrio un error");
+                    toastr.error("Ocurrio un error al editar");
                     } else {
-                console.log("Se Actualizo de manera correctamente");
+                    toastr.info("Se Actualizo de manera correctamente");
                     $('#exampleModal').modal('hide')
                 }
                 }).catch(error=>{
@@ -172,16 +172,20 @@
             deleteid(id) {
                 this.detalledelete = id;
             },
-            deleteDetalle(id) {
+            deleteDetalle(id, index) {
             let urldeleteDetalle = "Detalle_reservacion/" + id;
             axios.delete(urldeleteDetalle, this.detalledelete) .then((response) => {
             if (response.data.error) {
-                consolo.log("ocurrio un error");
+                toastr.error("Ocurrio un error al eliminar");
             } else {
-                console.log("se elimino de manera correctamente");
+               $('#deleteReservaciones').modal('hide');
+                toastr.warning("se elimino de manera correctamente");
+                this.reservaciones.splice(index,1);
             }
             })
-            .catch((error) => {});
+            .catch((error) => {
+              toastr.error("Ocurrio un error al eliminar");
+            });
         },
         createDetalle(){
             let url="Detalle_reservacion";
@@ -192,7 +196,9 @@
                     this.newdetalle.estado="",
                     this.newdetalle.vuelos_id="",
                     this.newdetalle.reservaciones_id=""
-                    $('#guardarModal').modal('hide');
+                     $('#guardarModal').modal('hide');
+                    toastr.success("La reservacion se guardo de manera correcta");
+                   
                 }
             }).catch(error=>{
                console.log("ocurrio un error al guarda"); 

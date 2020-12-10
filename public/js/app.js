@@ -2024,6 +2024,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2059,9 +2071,9 @@ __webpack_require__.r(__webpack_exports__);
       var urlUpdate = 'Detalle_reservacion/' + this.detalleedit.id;
       axios.put(urlUpdate, this.detalleedit).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("Ocurrio un error al editar");
         } else {
-          console.log("Se Actualizo de manera correctamente");
+          toastr.info("Se Actualizo de manera correctamente");
           $('#exampleModal').modal('hide');
         }
       })["catch"](function (error) {});
@@ -2069,26 +2081,34 @@ __webpack_require__.r(__webpack_exports__);
     deleteid: function deleteid(id) {
       this.detalledelete = id;
     },
-    deleteDetalle: function deleteDetalle(id) {
+    deleteDetalle: function deleteDetalle(id, index) {
+      var _this2 = this;
+
       var urldeleteDetalle = "Detalle_reservacion/" + id;
       axios["delete"](urldeleteDetalle, this.detalledelete).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("Ocurrio un error al eliminar");
         } else {
-          console.log("se elimino de manera correctamente");
+          $('#deleteReservaciones').modal('hide');
+          toastr.warning("se elimino de manera correctamente");
+
+          _this2.reservaciones.splice(index, 1);
         }
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        toastr.error("Ocurrio un error al eliminar");
+      });
     },
     createDetalle: function createDetalle() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "Detalle_reservacion";
       axios.post(url, this.newdetalle).then(function (response) {
         if (response.data.error) {
           console.log("ocurrio un error al guarda");
         } else {
-          _this2.newdetalle.estado = "", _this2.newdetalle.vuelos_id = "", _this2.newdetalle.reservaciones_id = "";
+          _this3.newdetalle.estado = "", _this3.newdetalle.vuelos_id = "", _this3.newdetalle.reservaciones_id = "";
           $('#guardarModal').modal('hide');
+          toastr.success("La reservacion se guardo de manera correcta");
         }
       })["catch"](function (error) {
         console.log("ocurrio un error al guarda");
@@ -2278,14 +2298,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //
       domicilios: [],
+      //
       domiciliodelete: [],
+      //
       domicilioedit: [],
+      //
       newdomicilio: {
         estado: "",
         municipio: "",
@@ -2304,7 +2326,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log("se carga la API");
   },
   methods: {
-    //función para obtener vuelos
+    //función para obtener domicilios
     getDomicilio: function getDomicilio() {
       var _this = this;
 
@@ -2313,46 +2335,60 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.domicilios);
       });
     },
+    //obtener id 
     updateid: function updateid(id) {
       this.domicilioedit = id;
     },
+    //editar domcilio
     editarDomcilio: function editarDomcilio() {
       var urlUpdate = 'Domicilio/' + this.domicilioedit.id;
       axios.put(urlUpdate, this.domicilioedit).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("Ocurrio un error al actualizar el domicilio");
         } else {
-          console.log("Se Actualizo de manera correctamente");
+          toastr.info("Se Actualizo de manera correctamente");
           $('#exampleModal').modal('hide');
         }
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        toastr.error("Ocurrio un error al actualizar el domicilio");
+      });
     },
+    //obtener id
     deleteid: function deleteid(id) {
       this.domiciliodelete = id;
     },
-    deleteDomicilio: function deleteDomicilio(id) {
+    //eliminar domicilio
+    deleteDomicilio: function deleteDomicilio(id, index) {
+      var _this2 = this;
+
       var urldeleteDomcilio = "Domicilio/" + id;
       axios["delete"](urldeleteDomcilio, this.domiciliodelete).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("Ocurrio un  al eliminar el domicilio");
         } else {
-          console.log("se elimino de manera correctamente");
+          toastr.warning("se elimino de manera correctamente");
+          $('#deleteDomicilio').modal('hide');
+
+          _this2.domicilios.splice(index, 1);
         }
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        toastr.error("Ocurrio un  al eliminar el domicilio");
+      });
     },
+    //nuevo domicilio
     createDomcilio: function createDomcilio() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "Domicilio";
       axios.post(url, this.newdomicilio).then(function (response) {
         if (response.data.error) {
-          console.log("ocurrio un error al guarda");
+          toastr.error("Ocurrio un error al guardar");
         } else {
-          _this2.newdomicilio.estado = "", _this2.newdomicilio.municipio = "", _this2.newdomicilio.colonia = "", _this2.newdomicilio.codigo_postal = "", _this2.newdomicilio.calle = "", _this2.newdomicilio.numero_interior = "", _this2.newdomicilio.numero_exterior = "", _this2.newdomicilio.referencias = "", _this2.newdomicilio.users_id = "";
-          $('#guardarModal').modal('hide');
+          _this3.newdomicilio.estado = "", _this3.newdomicilio.municipio = "", _this3.newdomicilio.colonia = "", _this3.newdomicilio.codigo_postal = "", _this3.newdomicilio.calle = "", _this3.newdomicilio.numero_interior = "", _this3.newdomicilio.numero_exterior = "", _this3.newdomicilio.referencias = "", _this3.newdomicilio.users_id = "", $('#guardarModal').modal('hide');
+          toastr.success('El domicilio se guardo con exito');
         }
       })["catch"](function (error) {
-        console.log("ocurrio un error al guarda");
+        toastr.error("Ocurrio un error al guardar");
       });
     }
   }
@@ -2402,6 +2438,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2536,13 +2574,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //
       reservaciones: [],
+      //
       reservaciondelete: [],
+      //
       reservacionedit: [],
+      //
       newreservacion: {
         costo: "",
         fecha_salida: "",
@@ -2557,7 +2599,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log("se carga la API");
   },
   methods: {
-    //función para obtener vuelos
+    //función para obtener Reservaciones
     getReservacion: function getReservacion() {
       var _this = this;
 
@@ -2566,46 +2608,59 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.reservaciones);
       });
     },
+    //obtener id
     updateid: function updateid(id) {
       this.reservacionedit = id;
     },
+    //editar reservaciones
     editarReservacion: function editarReservacion() {
       var urlUpdate = 'Reservaciones/' + this.reservacionedit.id;
       axios.put(urlUpdate, this.reservacionedit).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error("Ocurrio un error al actualizar");
         } else {
-          console.log("Se Actualizo de manera correctamente");
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.info("Se actualizo de manera correcta");
           $('#exampleModal').modal('hide');
         }
       })["catch"](function (error) {});
     },
+    //obtener id
     deleteid: function deleteid(id) {
       this.reservaciondelete = id;
     },
-    deleteReservaciones: function deleteReservaciones(id) {
+    //eliminar reservaciones
+    deleteReservaciones: function deleteReservaciones(id, index) {
+      var _this2 = this;
+
       var urldeleteReservaciones = "Reservaciones/" + id;
       axios["delete"](urldeleteReservaciones, this.reservaciondelete).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error("Ocurrio un error al eliminar la reservacion");
         } else {
-          console.log("se elimino de manera correctamente");
+          $('#deleteReservaciones').modal('hide');
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.warning("Se elimino de manera correctamente");
+
+          _this2.reservaciones.splice(index, 1);
         }
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error("Ocurrio un error al eliminar la reservacion");
+      });
     },
+    //nueva reservacion 
     createReservaciones: function createReservaciones() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "Reservaciones";
       axios.post(url, this.newreservacion).then(function (response) {
         if (response.data.error) {
-          console.log("ocurrio un error al guarda");
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error("No se pudo guardar la reservación");
         } else {
-          _this2.newreservacion.costo = "", _this2.newreservacion.fecha_salida = "", _this2.newreservacion.fecha_regreso = "", _this2.newreservacion.acompañantes = "", _this2.newreservacion.users_id = "";
+          _this3.newreservacion.costo = "", _this3.newreservacion.fecha_salida = "", _this3.newreservacion.fecha_regreso = "", _this3.newreservacion.acompañantes = "", _this3.newreservacion.users_id = "";
           $('#guardarModal').modal('hide');
+          toastr__WEBPACK_IMPORTED_MODULE_0___default.a.success("La reservacion se guardo de manera correcta");
         }
       })["catch"](function (error) {
-        console.log("ocurrio un error al guarda");
+        toastr__WEBPACK_IMPORTED_MODULE_0___default.a.error("No se pudo guardar la reservacion");
       });
     }
   }
@@ -2697,6 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getUsuarios();
     console.log("se carga la API");
   },
+  //mostrar usuarios
   methods: {
     getUsuarios: function getUsuarios() {
       var _this = this;
@@ -2706,16 +2762,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.usuarios);
       });
     },
+    // obtener id
     updateid: function updateid(id) {
       this.usuarioedit = id;
     },
+    //editar usuario
     editarUsuario: function editarUsuario() {
       var urlUpdate = 'Usuario/' + this.usuarioedit.id;
       axios.put(urlUpdate, this.usuarioedit).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("Ocurrio un error al actualizar");
         } else {
           console.log("Se Actualizo de manera correctamente");
+          toastr.info("Se actualizo de manera correcta");
           $('#exampleModal').modal('hide');
         }
       })["catch"](function (error) {});
@@ -2841,11 +2900,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2859,8 +2913,7 @@ __webpack_require__.r(__webpack_exports__);
       newvuelo: {
         pais: "",
         ciudad: "",
-        descripcion: "",
-        img: ""
+        descripcion: ""
       },
       errors: []
     };
@@ -2869,11 +2922,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getVuelos();
     console.log("se carga la API");
   },
-  computed: {
-    comprobar: function comprobar() {
-      return this.newvuelo.pais.length = null ? undefined : true;
-    }
-  },
+  computed: {},
   methods: {
     //función para obtener vuelos
     getVuelos: function getVuelos() {
@@ -2893,9 +2942,9 @@ __webpack_require__.r(__webpack_exports__);
       var urlUpdate = "Vuelos/" + this.vueloedit.id;
       axios.put(urlUpdate, this.vueloedit).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.error("ocurrio un error");
         } else {
-          console.log("Se Actualizo de manera correctamente");
+          toastr.info("Se Actualizo de manera correctamente");
           $("#exampleModal").modal("hide");
         }
       })["catch"](function (error) {});
@@ -2904,31 +2953,37 @@ __webpack_require__.r(__webpack_exports__);
     deleteid: function deleteid(id) {
       this.vuelodelete = id;
     },
-    deleteVuelo: function deleteVuelo(id) {
+    deleteVuelo: function deleteVuelo(id, index) {
+      var _this2 = this;
+
       var urldeleteVuelo = "Vuelos/" + id;
       axios["delete"](urldeleteVuelo, this.vuelodelete).then(function (response) {
         if (response.data.error) {
-          consolo.log("ocurrio un error");
+          toastr.info("Ocurrio un error al eliminar el vuelo");
         } else {
-          console.log("se elimino de manera correctamente");
+          toastr.warning("Se elimino de manera correctamente");
           $("#deletevuelos").modal("hide");
+
+          _this2.vuelos.splice(index, 1);
         }
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        toastr.error("Ocurrio un error al eliminar el vuelo");
+      });
     },
     //nuevo vuelo
     createVuelo: function createVuelo() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "Vuelos";
       axios.post(url, this.newvuelo).then(function (response) {
         if (response.data.error) {
-          console.log("ocurrio un error al guarda");
+          console.log("Ocurrio un error al guardar");
         } else {
-          _this2.newvuelo.pais = "", _this2.newvuelo.ciudad = "", _this2.newvuelo.descripcion = "", _this2.newvuelo.img = "";
-          $("#guardarModal").modal("hide");
+          _this3.newvuelo.pais = "", _this3.newvuelo.ciudad = "", _this3.newvuelo.descripcion = "", $("#guardarModal").modal("hide");
+          toastr.success("El vuelo se guardo de manera correcta");
         }
       })["catch"](function (error) {
-        console.log("ocurrio un error al guarda");
+        toastr.error("No se pudo guardar el vuelo");
       });
     }
   }
@@ -7373,10 +7428,10 @@ __webpack_require__.r(__webpack_exports__);
 
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,800|Poppins&display=swap);", ""]);
+
 
 // module
-exports.push([module.i, "\n.cards {\r\n  max-width: 400px;\r\n  margin: 0 auto;\r\n  text-align: center;\r\n  padding: 10px;\n}\n.cards h2.header {\r\n  font-size: 20px;\r\n  margin: 0 0 10px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.services {\r\n  display: flex;\r\n  align-items: center;\n}\n.content {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  flex: 1;\r\n  margin: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n  border-radius: 4px;\r\n  transition: all 0.3s ease;\n}\n.content .fab {\r\n  font-size: 70px;\r\n  margin: 5px 0;\n}\n.content > * {\r\n  flex: 1 1 100%;\n}\n.content h2 {\r\n  font-size: 12px;\r\n  margin: 8px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h4 {\r\n  font-size: 10px;\r\n  margin: 5px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h3 {\r\n  font-size: 9px;\r\n  margin: 3px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content p {\r\n  font-size: 9px;\r\n  font-family: \"Poppins\", sans-serif;\r\n  text-transform: uppercase;\n}\n.content a:hover {\r\n  border-radius: 4px;\n}\n.boton_edit{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #006558;\r\n    background-color: #82b085;\r\n    border-radius: 15px;\r\n    border: 3px double #dee9de;\n}\n.boton_edit:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\n.boton_delete{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #650000;\r\n    background-color: #a00527;\r\n    border-radius: 15px;\r\n    border: 3px double #f7faf7;\n}\n.boton_delete:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.boton_edit {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #006558;\r\n  background-color: #82b085;\r\n  border-radius: 15px;\r\n  border: 3px double #dee9de;\n}\n.boton_edit:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_delete {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #650000;\r\n  background-color: #a00527;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_delete:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_create {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #f5f4fa;\r\n  background-color: #66a9ec;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_create:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_cancel {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #202020;\r\n  background-color: #eaec66;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_cancel:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_update {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color:  #3003cf;\r\n  background-color: #f0f0ef;\r\n  border-radius: 15px;\r\n  border: 3px double #3003cf;\n}\n.boton_update:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\r\n", ""]);
 
 // exports
 
@@ -7414,7 +7469,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Montserrat:400,800|Poppins&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.cards {\r\n  max-width: 400px;\r\n  margin: 0 auto;\r\n  text-align: center;\r\n  padding: 10px;\n}\n.cards h2.header {\r\n  font-size: 20px;\r\n  margin: 0 0 10px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.services {\r\n  display: flex;\r\n  align-items: center;\n}\n.content {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  flex: 1;\r\n  margin: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n  border-radius: 4px;\r\n  transition: all 0.3s ease;\n}\n.content .fab {\r\n  font-size: 70px;\r\n  margin: 5px 0;\n}\n.content > * {\r\n  flex: 1 1 100%;\n}\n.content h2 {\r\n  font-size: 12px;\r\n  margin: 8px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h4 {\r\n  font-size: 10px;\r\n  margin: 5px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h3 {\r\n  font-size: 9px;\r\n  margin: 3px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content p {\r\n  font-size: 9px;\r\n  font-family: \"Poppins\", sans-serif;\r\n  text-transform: uppercase;\n}\n.content a:hover {\r\n  border-radius: 4px;\n}\n.boton_edit{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #006558;\r\n    background-color: #82b085;\r\n    border-radius: 15px;\r\n    border: 3px double #dee9de;\n}\n.boton_edit:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\n.boton_delete{\r\n    text-decoration: none;\r\n    padding: 3px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    font-family: helvetica;\r\n    font-weight: 300;\r\n    font-size: 15px;\r\n    font-style: italic;\r\n    color: #650000;\r\n    background-color: #a00527;\r\n    border-radius: 15px;\r\n    border: 3px double #f7faf7;\n}\n.boton_delete:hover{\r\n    opacity: 0.6;\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.cards {\r\n  max-width: 400px;\r\n  margin: 0 auto;\r\n  text-align: center;\r\n  padding: 10px;\n}\n.cards h2.header {\r\n  font-size: 20px;\r\n  margin: 0 0 10px 0;\r\n  text-transform: uppercase;\r\n  letter-spacing: 1px;\n}\n.services {\r\n  display: flex;\r\n  align-items: center;\n}\n.content {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  flex: 1;\r\n  margin: 20px;\r\n  padding: 20px;\r\n  border: 2px solid black;\r\n  border-radius: 4px;\r\n  transition: all 0.3s ease;\n}\n.content .fab {\r\n  font-size: 70px;\r\n  margin: 5px 0;\n}\n.content > * {\r\n  flex: 1 1 100%;\n}\n.content h2 {\r\n  font-size: 12px;\r\n  margin: 8px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h4 {\r\n  font-size: 10px;\r\n  margin: 5px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content h3 {\r\n  font-size: 9px;\r\n  margin: 3px 0;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\n}\n.content p {\r\n  font-size: 9px;\r\n  font-family: \"Poppins\", sans-serif;\r\n  text-transform: uppercase;\n}\n.content a:hover {\r\n  border-radius: 4px;\n}\n.boton_edit {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #006558;\r\n  background-color: #82b085;\r\n  border-radius: 15px;\r\n  border: 3px double #dee9de;\n}\n.boton_edit:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_delete {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #650000;\r\n  background-color: #a00527;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_delete:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_create {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #f5f4fa;\r\n  background-color: #66a9ec;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_create:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_cancel {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color: #202020;\r\n  background-color: #eaec66;\r\n  border-radius: 15px;\r\n  border: 3px double #f7faf7;\n}\n.boton_cancel:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\n.boton_update {\r\n  text-decoration: none;\r\n  padding: 3px;\r\n  padding-left: 5px;\r\n  padding-right: 5px;\r\n  font-family: helvetica;\r\n  font-weight: 300;\r\n  font-size: 15px;\r\n  font-style: italic;\r\n  color:  #3003cf;\r\n  background-color: #f0f0ef;\r\n  border-radius: 15px;\r\n  border: 3px double #3003cf;\n}\n.boton_update:hover {\r\n  opacity: 0.6;\r\n  text-decoration: none;\n}\r\n", ""]);
 
 // exports
 
@@ -39352,6 +39407,488 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/toastr/toastr.js":
+/*!***************************************!*\
+  !*** ./node_modules/toastr/toastr.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * Toastr
+ * Copyright 2012-2015
+ * Authors: John Papa, Hans Fjällemark, and Tim Ferrell.
+ * All Rights Reserved.
+ * Use, reproduction, distribution, and modification of this code is subject to the terms and
+ * conditions of the MIT license, available at http://www.opensource.org/licenses/mit-license.php
+ *
+ * ARIA Support: Greta Krafsig
+ *
+ * Project: https://github.com/CodeSeven/toastr
+ */
+/* global define */
+(function (define) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+        return (function () {
+            var $container;
+            var listener;
+            var toastId = 0;
+            var toastType = {
+                error: 'error',
+                info: 'info',
+                success: 'success',
+                warning: 'warning'
+            };
+
+            var toastr = {
+                clear: clear,
+                remove: remove,
+                error: error,
+                getContainer: getContainer,
+                info: info,
+                options: {},
+                subscribe: subscribe,
+                success: success,
+                version: '2.1.4',
+                warning: warning
+            };
+
+            var previousToast;
+
+            return toastr;
+
+            ////////////////
+
+            function error(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.error,
+                    iconClass: getOptions().iconClasses.error,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function getContainer(options, create) {
+                if (!options) { options = getOptions(); }
+                $container = $('#' + options.containerId);
+                if ($container.length) {
+                    return $container;
+                }
+                if (create) {
+                    $container = createContainer(options);
+                }
+                return $container;
+            }
+
+            function info(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.info,
+                    iconClass: getOptions().iconClasses.info,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function subscribe(callback) {
+                listener = callback;
+            }
+
+            function success(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.success,
+                    iconClass: getOptions().iconClasses.success,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function warning(message, title, optionsOverride) {
+                return notify({
+                    type: toastType.warning,
+                    iconClass: getOptions().iconClasses.warning,
+                    message: message,
+                    optionsOverride: optionsOverride,
+                    title: title
+                });
+            }
+
+            function clear($toastElement, clearOptions) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if (!clearToast($toastElement, options, clearOptions)) {
+                    clearContainer(options);
+                }
+            }
+
+            function remove($toastElement) {
+                var options = getOptions();
+                if (!$container) { getContainer(options); }
+                if ($toastElement && $(':focus', $toastElement).length === 0) {
+                    removeToast($toastElement);
+                    return;
+                }
+                if ($container.children().length) {
+                    $container.remove();
+                }
+            }
+
+            // internal functions
+
+            function clearContainer (options) {
+                var toastsToClear = $container.children();
+                for (var i = toastsToClear.length - 1; i >= 0; i--) {
+                    clearToast($(toastsToClear[i]), options);
+                }
+            }
+
+            function clearToast ($toastElement, options, clearOptions) {
+                var force = clearOptions && clearOptions.force ? clearOptions.force : false;
+                if ($toastElement && (force || $(':focus', $toastElement).length === 0)) {
+                    $toastElement[options.hideMethod]({
+                        duration: options.hideDuration,
+                        easing: options.hideEasing,
+                        complete: function () { removeToast($toastElement); }
+                    });
+                    return true;
+                }
+                return false;
+            }
+
+            function createContainer(options) {
+                $container = $('<div/>')
+                    .attr('id', options.containerId)
+                    .addClass(options.positionClass);
+
+                $container.appendTo($(options.target));
+                return $container;
+            }
+
+            function getDefaults() {
+                return {
+                    tapToDismiss: true,
+                    toastClass: 'toast',
+                    containerId: 'toast-container',
+                    debug: false,
+
+                    showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+                    showDuration: 300,
+                    showEasing: 'swing', //swing and linear are built into jQuery
+                    onShown: undefined,
+                    hideMethod: 'fadeOut',
+                    hideDuration: 1000,
+                    hideEasing: 'swing',
+                    onHidden: undefined,
+                    closeMethod: false,
+                    closeDuration: false,
+                    closeEasing: false,
+                    closeOnHover: true,
+
+                    extendedTimeOut: 1000,
+                    iconClasses: {
+                        error: 'toast-error',
+                        info: 'toast-info',
+                        success: 'toast-success',
+                        warning: 'toast-warning'
+                    },
+                    iconClass: 'toast-info',
+                    positionClass: 'toast-top-right',
+                    timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
+                    titleClass: 'toast-title',
+                    messageClass: 'toast-message',
+                    escapeHtml: false,
+                    target: 'body',
+                    closeHtml: '<button type="button">&times;</button>',
+                    closeClass: 'toast-close-button',
+                    newestOnTop: true,
+                    preventDuplicates: false,
+                    progressBar: false,
+                    progressClass: 'toast-progress',
+                    rtl: false
+                };
+            }
+
+            function publish(args) {
+                if (!listener) { return; }
+                listener(args);
+            }
+
+            function notify(map) {
+                var options = getOptions();
+                var iconClass = map.iconClass || options.iconClass;
+
+                if (typeof (map.optionsOverride) !== 'undefined') {
+                    options = $.extend(options, map.optionsOverride);
+                    iconClass = map.optionsOverride.iconClass || iconClass;
+                }
+
+                if (shouldExit(options, map)) { return; }
+
+                toastId++;
+
+                $container = getContainer(options, true);
+
+                var intervalId = null;
+                var $toastElement = $('<div/>');
+                var $titleElement = $('<div/>');
+                var $messageElement = $('<div/>');
+                var $progressElement = $('<div/>');
+                var $closeElement = $(options.closeHtml);
+                var progressBar = {
+                    intervalId: null,
+                    hideEta: null,
+                    maxHideTime: null
+                };
+                var response = {
+                    toastId: toastId,
+                    state: 'visible',
+                    startTime: new Date(),
+                    options: options,
+                    map: map
+                };
+
+                personalizeToast();
+
+                displayToast();
+
+                handleEvents();
+
+                publish(response);
+
+                if (options.debug && console) {
+                    console.log(response);
+                }
+
+                return $toastElement;
+
+                function escapeHtml(source) {
+                    if (source == null) {
+                        source = '';
+                    }
+
+                    return source
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                }
+
+                function personalizeToast() {
+                    setIcon();
+                    setTitle();
+                    setMessage();
+                    setCloseButton();
+                    setProgressBar();
+                    setRTL();
+                    setSequence();
+                    setAria();
+                }
+
+                function setAria() {
+                    var ariaValue = '';
+                    switch (map.iconClass) {
+                        case 'toast-success':
+                        case 'toast-info':
+                            ariaValue =  'polite';
+                            break;
+                        default:
+                            ariaValue = 'assertive';
+                    }
+                    $toastElement.attr('aria-live', ariaValue);
+                }
+
+                function handleEvents() {
+                    if (options.closeOnHover) {
+                        $toastElement.hover(stickAround, delayedHideToast);
+                    }
+
+                    if (!options.onclick && options.tapToDismiss) {
+                        $toastElement.click(hideToast);
+                    }
+
+                    if (options.closeButton && $closeElement) {
+                        $closeElement.click(function (event) {
+                            if (event.stopPropagation) {
+                                event.stopPropagation();
+                            } else if (event.cancelBubble !== undefined && event.cancelBubble !== true) {
+                                event.cancelBubble = true;
+                            }
+
+                            if (options.onCloseClick) {
+                                options.onCloseClick(event);
+                            }
+
+                            hideToast(true);
+                        });
+                    }
+
+                    if (options.onclick) {
+                        $toastElement.click(function (event) {
+                            options.onclick(event);
+                            hideToast();
+                        });
+                    }
+                }
+
+                function displayToast() {
+                    $toastElement.hide();
+
+                    $toastElement[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing, complete: options.onShown}
+                    );
+
+                    if (options.timeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.timeOut);
+                        progressBar.maxHideTime = parseFloat(options.timeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                        if (options.progressBar) {
+                            progressBar.intervalId = setInterval(updateProgress, 10);
+                        }
+                    }
+                }
+
+                function setIcon() {
+                    if (map.iconClass) {
+                        $toastElement.addClass(options.toastClass).addClass(iconClass);
+                    }
+                }
+
+                function setSequence() {
+                    if (options.newestOnTop) {
+                        $container.prepend($toastElement);
+                    } else {
+                        $container.append($toastElement);
+                    }
+                }
+
+                function setTitle() {
+                    if (map.title) {
+                        var suffix = map.title;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.title);
+                        }
+                        $titleElement.append(suffix).addClass(options.titleClass);
+                        $toastElement.append($titleElement);
+                    }
+                }
+
+                function setMessage() {
+                    if (map.message) {
+                        var suffix = map.message;
+                        if (options.escapeHtml) {
+                            suffix = escapeHtml(map.message);
+                        }
+                        $messageElement.append(suffix).addClass(options.messageClass);
+                        $toastElement.append($messageElement);
+                    }
+                }
+
+                function setCloseButton() {
+                    if (options.closeButton) {
+                        $closeElement.addClass(options.closeClass).attr('role', 'button');
+                        $toastElement.prepend($closeElement);
+                    }
+                }
+
+                function setProgressBar() {
+                    if (options.progressBar) {
+                        $progressElement.addClass(options.progressClass);
+                        $toastElement.prepend($progressElement);
+                    }
+                }
+
+                function setRTL() {
+                    if (options.rtl) {
+                        $toastElement.addClass('rtl');
+                    }
+                }
+
+                function shouldExit(options, map) {
+                    if (options.preventDuplicates) {
+                        if (map.message === previousToast) {
+                            return true;
+                        } else {
+                            previousToast = map.message;
+                        }
+                    }
+                    return false;
+                }
+
+                function hideToast(override) {
+                    var method = override && options.closeMethod !== false ? options.closeMethod : options.hideMethod;
+                    var duration = override && options.closeDuration !== false ?
+                        options.closeDuration : options.hideDuration;
+                    var easing = override && options.closeEasing !== false ? options.closeEasing : options.hideEasing;
+                    if ($(':focus', $toastElement).length && !override) {
+                        return;
+                    }
+                    clearTimeout(progressBar.intervalId);
+                    return $toastElement[method]({
+                        duration: duration,
+                        easing: easing,
+                        complete: function () {
+                            removeToast($toastElement);
+                            clearTimeout(intervalId);
+                            if (options.onHidden && response.state !== 'hidden') {
+                                options.onHidden();
+                            }
+                            response.state = 'hidden';
+                            response.endTime = new Date();
+                            publish(response);
+                        }
+                    });
+                }
+
+                function delayedHideToast() {
+                    if (options.timeOut > 0 || options.extendedTimeOut > 0) {
+                        intervalId = setTimeout(hideToast, options.extendedTimeOut);
+                        progressBar.maxHideTime = parseFloat(options.extendedTimeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                    }
+                }
+
+                function stickAround() {
+                    clearTimeout(intervalId);
+                    progressBar.hideEta = 0;
+                    $toastElement.stop(true, true)[options.showMethod](
+                        {duration: options.showDuration, easing: options.showEasing}
+                    );
+                }
+
+                function updateProgress() {
+                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+                    $progressElement.width(percentage + '%');
+                }
+            }
+
+            function getOptions() {
+                return $.extend({}, getDefaults(), toastr.options);
+            }
+
+            function removeToast($toastElement) {
+                if (!$container) { $container = getContainer(); }
+                if ($toastElement.is(':visible')) {
+                    return;
+                }
+                $toastElement.remove();
+                $toastElement = null;
+                if ($container.children().length === 0) {
+                    $container.remove();
+                    previousToast = undefined;
+                }
+            }
+
+        })();
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}(__webpack_require__(/*! !webpack amd define */ "./node_modules/webpack/buildin/amd-define.js")));
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Detalle_Reservacion/ShowComponent.vue?vue&type=template&id=436a7c8b&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Detalle_Reservacion/ShowComponent.vue?vue&type=template&id=436a7c8b& ***!
@@ -39377,8 +39914,8 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.detalles, function(detalle) {
-              return _c("tr", { key: detalle.id }, [
+            _vm._l(_vm.detalles, function(detalle, index) {
+              return _c("tr", { key: index }, [
                 _c("td", { domProps: { textContent: _vm._s(detalle.id) } }),
                 _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(detalle.estado) } }),
@@ -39389,7 +39926,27 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", {
                   domProps: { textContent: _vm._s(detalle.reservaciones_id) }
-                })
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "boton_edit",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#exampleModal",
+                        type: "button"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.updateid(detalle)
+                        }
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  )
+                ])
               ])
             }),
             0
@@ -39401,7 +39958,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark",
         attrs: {
           id: "exampleModal",
           tabindex: "-1",
@@ -39415,7 +39972,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark" }, [
               _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -39440,31 +39997,48 @@ var render = function() {
                         [_vm._v("Estado:")]
                       ),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.detalleedit.estado,
-                            expression: "detalleedit.estado"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
-                        domProps: { value: _vm.detalleedit.estado },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.detalleedit.estado,
+                              expression: "detalleedit.estado"
                             }
-                            _vm.$set(
-                              _vm.detalleedit,
-                              "estado",
-                              $event.target.value
-                            )
+                          ],
+                          staticClass: "form-select",
+                          attrs: {
+                            "aria-label": ".form-select-sm example",
+                            name: "recipient-name"
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.detalleedit,
+                                "estado",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
                           }
-                        }
-                      })
+                        },
+                        [
+                          _c("option", [_vm._v("Activo")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("Inactivo")])
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
@@ -39474,7 +40048,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Estado:")]
+                        [_vm._v("Vuelo ID:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -39511,7 +40085,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Municipio:")]
+                        [_vm._v("Reservacion ID:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -39554,7 +40128,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark",
         attrs: {
           id: "deleteReservaciones",
           tabindex: "-1",
@@ -39568,7 +40142,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark" }, [
               _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -39583,11 +40157,11 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
+              _c("div", { staticClass: "modal-footer border-dark" }, [
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-secondary",
+                    staticClass: "boton_cancel",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
                   [_vm._v("Cancelar")]
@@ -39596,7 +40170,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-danger",
+                    staticClass: "boton_delete",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -39616,7 +40190,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark",
         attrs: {
           id: "guardarModal",
           tabindex: "-1",
@@ -39630,7 +40204,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark" }, [
               _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -39655,31 +40229,48 @@ var render = function() {
                         [_vm._v("Estado:")]
                       ),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.newdetalle.estado,
-                            expression: "newdetalle.estado"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
-                        domProps: { value: _vm.newdetalle.estado },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newdetalle.estado,
+                              expression: "newdetalle.estado"
                             }
-                            _vm.$set(
-                              _vm.newdetalle,
-                              "estado",
-                              $event.target.value
-                            )
+                          ],
+                          staticClass: "form-select",
+                          attrs: {
+                            "aria-label": ".form-select-sm example",
+                            name: "recipient-name"
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.newdetalle,
+                                "estado",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
                           }
-                        }
-                      })
+                        },
+                        [
+                          _c("option", [_vm._v("Activo")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("Inactivo")])
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
@@ -39689,7 +40280,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Id Vuelo:")]
+                        [_vm._v("Vuelo ID:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -39702,7 +40293,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "0",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdetalle.vuelos_id },
                         on: {
                           input: function($event) {
@@ -39726,7 +40321,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Id reservacion:")]
+                        [_vm._v("Reservacion ID:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -39739,7 +40334,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "0",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdetalle.reservaciones_id },
                         on: {
                           input: function($event) {
@@ -39772,22 +40371,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "justify-content-center btn btn-primary",
-        attrs: {
-          "data-toggle": "modal",
-          "data-target": "#guardarModal",
-          type: "button"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-plus-circle" }, [
-          _vm._v("Nueva Reservacion")
-        ])
-      ]
-    )
+    return _c("div", [
+      _c(
+        "button",
+        {
+          staticClass: "justify-content-center boton_create",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#guardarModal",
+            type: "button"
+          }
+        },
+        [
+          _c("i", { staticClass: "fas fa-plus-circle" }, [
+            _vm._v("Nueva Reservacion")
+          ])
+        ]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -39795,13 +40396,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("id")]),
+        _c("th", [_vm._v("Folio")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Vuelo")]),
+        _c("th", [_vm._v("Vuelo ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Reservacion id")])
+        _c("th", [_vm._v("Reservacion ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Editar")])
       ])
     ])
   },
@@ -39809,7 +40412,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -39834,11 +40437,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark" }, [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "boton_cancel",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cancelar")]
@@ -39847,7 +40450,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "boton_edit",
           attrs: { type: "submit", name: "action" }
         },
         [_vm._v("Actualizar")]
@@ -39858,11 +40461,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Eliminar Reservaciones")]
+        [_vm._v("Eliminar Detalle Reservaciones")]
       ),
       _vm._v(" "),
       _c(
@@ -39883,7 +40486,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -39908,11 +40511,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark" }, [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "boton_cancel",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cancelar")]
@@ -39921,7 +40524,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "boton_update",
           attrs: { type: "submit", name: "action" }
         },
         [_vm._v("Guardar")]
@@ -39956,8 +40559,8 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.domicilios, function(domicilio) {
-        return _c("div", { key: domicilio.id, staticClass: "col-sm" }, [
+      _vm._l(_vm.domicilios, function(domicilio, index) {
+        return _c("div", { key: index, staticClass: "col-sm" }, [
           _c("div", { staticClass: "cards" }, [
             _c("div", { staticClass: "services" }, [
               _c("div", { staticClass: "content content-1" }, [
@@ -40077,7 +40680,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade ",
+        staticClass: "modal fade border-dark  ",
         attrs: {
           id: "exampleModal",
           tabindex: "-1",
@@ -40415,7 +41018,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "deleteDomicilio",
           tabindex: "-1",
@@ -40432,7 +41035,7 @@ var render = function() {
             attrs: { role: "document" }
           },
           [
-            _c("div", { staticClass: "modal-content " }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -40480,7 +41083,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "guardarModal",
           tabindex: "-1",
@@ -40529,7 +41132,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "1",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.users_id },
                         on: {
                           input: function($event) {
@@ -40566,7 +41173,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
+                        attrs: {
+                          type: "text",
+                          placeholder: "Estado",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.estado },
                         on: {
                           input: function($event) {
@@ -40603,7 +41214,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
+                        attrs: {
+                          type: "text",
+                          placeholder: "Municipio",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.municipio },
                         on: {
                           input: function($event) {
@@ -40640,7 +41255,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
+                        attrs: {
+                          type: "text",
+                          placeholder: "Colonia",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.colonia },
                         on: {
                           input: function($event) {
@@ -40677,7 +41296,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "50000",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.codigo_postal },
                         on: {
                           input: function($event) {
@@ -40714,7 +41337,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
+                        attrs: {
+                          type: "text",
+                          placeholder: "Calle",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.calle },
                         on: {
                           input: function($event) {
@@ -40751,7 +41378,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "0",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.numero_interior },
                         on: {
                           input: function($event) {
@@ -40788,7 +41419,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "0",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.numero_exterior },
                         on: {
                           input: function($event) {
@@ -40825,7 +41460,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
+                        attrs: {
+                          type: "text",
+                          placeholder: "Ejemplo: Casa de dos pisos",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newdomicilio.referencias },
                         on: {
                           input: function($event) {
@@ -40864,7 +41503,7 @@ var staticRenderFns = [
         staticClass: "justify-content-center boton_create",
         attrs: {
           "data-toggle": "modal",
-          "data-target": "#\r\n  ",
+          "data-target": "#guardarModal",
           type: "button"
         }
       },
@@ -41073,8 +41712,8 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.reservaciones, function(reservacion) {
-        return _c("div", { key: reservacion.id, staticClass: "col-sm" }, [
+      _vm._l(_vm.reservaciones, function(reservacion, index) {
+        return _c("div", { key: index, staticClass: "col-sm" }, [
           _c("div", { staticClass: "cards" }, [
             _c("div", { staticClass: "services" }, [
               _c("div", { staticClass: "content content-1" }, [
@@ -41168,7 +41807,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "exampleModal",
           tabindex: "-1",
@@ -41182,7 +41821,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -41204,7 +41843,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Estado:")]
+                        [_vm._v("ID de Usuario:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41241,7 +41880,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Estado:")]
+                        [_vm._v("Costo:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41278,7 +41917,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Municipio:")]
+                        [_vm._v("Fecha Salidad:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41315,7 +41954,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Colonia:")]
+                        [_vm._v("Fecha Regreso:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41352,7 +41991,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Codigo Postal:")]
+                        [_vm._v("Acompañantes:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41395,7 +42034,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "deleteReservaciones",
           tabindex: "-1",
@@ -41409,7 +42048,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -41424,11 +42063,11 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
+              _c("div", { staticClass: "modal-footer border-dark " }, [
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-secondary",
+                    staticClass: "boton_cancel",
                     attrs: { type: "button", "data-dismiss": "modal" }
                   },
                   [_vm._v("Cancelar")]
@@ -41437,7 +42076,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-danger",
+                    staticClass: "boton_delete",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -41457,7 +42096,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "guardarModal",
           tabindex: "-1",
@@ -41471,7 +42110,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -41493,7 +42132,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("Id del Usuario:")]
+                        [_vm._v("ID del Usuario:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41506,7 +42145,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "1",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newreservacion.users_id },
                         on: {
                           input: function($event) {
@@ -41543,7 +42186,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "2000",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newreservacion.costo },
                         on: {
                           input: function($event) {
@@ -41567,7 +42214,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("fecha salida:")]
+                        [_vm._v("Fecha salida:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41604,7 +42251,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { align: "left", for: "recipient-name" }
                         },
-                        [_vm._v("fecha regreso:")]
+                        [_vm._v("Fecha regreso:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -41654,7 +42301,11 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "recipient-name" },
+                        attrs: {
+                          type: "number",
+                          placeholder: "5",
+                          id: "recipient-name"
+                        },
                         domProps: { value: _vm.newreservacion.acompañantes },
                         on: {
                           input: function($event) {
@@ -41690,7 +42341,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "justify-content-center btn btn-primary",
+        staticClass: "justify-content-center boton_create",
         attrs: {
           "data-toggle": "modal",
           "data-target": "#guardarModal",
@@ -41708,7 +42359,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -41733,11 +42384,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark " }, [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "boton_cancel",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cancelar")]
@@ -41746,7 +42397,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "boton_edit",
           attrs: { type: "submit", name: "action" }
         },
         [_vm._v("Actualizar")]
@@ -41757,7 +42408,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -41782,7 +42433,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -41807,11 +42458,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark " }, [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "boton_cancel",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cancelar")]
@@ -41820,7 +42471,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "boton_update",
           attrs: { type: "submit", name: "action" }
         },
         [_vm._v("Guardar")]
@@ -41902,7 +42553,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "exampleModal",
           tabindex: "-1",
@@ -41916,7 +42567,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -42113,7 +42764,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -42138,7 +42789,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark " }, [
       _c(
         "button",
         {
@@ -42186,8 +42837,8 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.vuelos, function(vuelo) {
-        return _c("div", { key: vuelo.id, staticClass: "col-sm" }, [
+      _vm._l(_vm.vuelos, function(vuelo, index) {
+        return _c("div", { key: index, staticClass: "col-sm" }, [
           _c(
             "div",
             {
@@ -42257,7 +42908,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "exampleModal",
           tabindex: "-1",
@@ -42271,7 +42922,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -42406,7 +43057,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "deletevuelos",
           tabindex: "-1",
@@ -42420,7 +43071,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -42435,7 +43086,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
+              _c("div", { staticClass: "modal-footer border-dark " }, [
                 _c(
                   "button",
                   {
@@ -42468,7 +43119,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade border-dark ",
         attrs: {
           id: "guardarModal",
           tabindex: "-1",
@@ -42482,7 +43133,7 @@ var render = function() {
           "div",
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-dark " }, [
               _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -42608,39 +43259,6 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "mb-3" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-form-label",
-                          attrs: { align: "left", for: "recipient-name" }
-                        },
-                        [_vm._v("URL de Imagen:")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.newvuelo.img,
-                            expression: "newvuelo.img"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "recipient-name" },
-                        domProps: { value: _vm.newvuelo.img },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.newvuelo, "img", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
                     _vm._m(5)
                   ]
                 )
@@ -42678,7 +43296,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -42703,7 +43321,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark " }, [
       _c(
         "button",
         {
@@ -42727,7 +43345,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -42752,7 +43370,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header border-dark " }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -42777,7 +43395,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
+    return _c("div", { staticClass: "modal-footer border-dark " }, [
       _c(
         "button",
         {
@@ -54902,6 +55520,20 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/webpack/buildin/amd-define.js":
+/*!***************************************!*\
+  !*** (webpack)/buildin/amd-define.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function() {
+	throw new Error("define cannot be used indirect");
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -54979,8 +55611,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_2__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://127.0.0.1:8000/api/';
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
@@ -55015,12 +55650,13 @@ try {
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
+
+toastr = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

@@ -2,6 +2,7 @@ import './bootstrap';
 
 window.Vue = require('vue');
 import axios from 'axios';
+import toastr from 'toastr';
 axios.defaults.baseURL = 'http://127.0.0.1:8000/api/'; 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);

@@ -2,7 +2,7 @@
 <div>
   <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center boton_create"><i class="fas fa-plus-circle">Nueva Reservacion</i></button>
           <div class="row">
-            <div class="col-sm" v-for="reservacion in reservaciones" :key="reservacion.id">
+            <div class="col-sm" v-for="(reservacion, index) in reservaciones" :key="index">
               <div class="cards">
               <div class="services" >
                 <div class="content content-1" >
@@ -133,6 +133,7 @@
 </div>
 </template>
 <script>
+import toastr from 'toastr';
         export default {
           data() {
             return {
@@ -173,10 +174,10 @@
                 let urlUpdate='Reservaciones/'+ this.reservacionedit.id;
                 axios.put(urlUpdate,this.reservacionedit).then(response =>{
                 if(response.data.error){
-                    consolo.log("ocurrio un error");
+                      toastr.error("Ocurrio un error al actualizar");
                     } else {
-                console.log("Se Actualizo de manera correctamente");
-                    $('#exampleModal').modal('hide')
+                      toastr.info("Se actualizo de manera correcta");
+                      $('#exampleModal').modal('hide');
                 }
                 }).catch(error=>{
                 });
@@ -186,23 +187,27 @@
                 this.reservaciondelete = id;
             },
             //eliminar reservaciones
-            deleteReservaciones(id) {
+            deleteReservaciones(id, index) {
             let urldeleteReservaciones = "Reservaciones/" + id;
             axios.delete(urldeleteReservaciones, this.reservaciondelete) .then((response) => {
             if (response.data.error) {
-                consolo.log("ocurrio un error");
+               toastr.error("Ocurrio un error al eliminar la reservacion");
             } else {
-                console.log("se elimino de manera correctamente");
+                $('#deleteReservaciones').modal('hide');
+                toastr.warning("Se elimino de manera correctamente");
+                this.reservaciones.splice(index,1);
             }
             })
-            .catch((error) => {});
+            .catch((error) => {
+              toastr.error("Ocurrio un error al eliminar la reservacion");
+            });
         },
         //nueva reservacion 
         createReservaciones(){
             let url="Reservaciones";
             axios.post(url,this.newreservacion).then(response=>{
                 if(response.data.error ){
-                    console.log("ocurrio un error al guarda");
+                    toastr.error("No se pudo guardar la reservación");
                 }else{
                     this.newreservacion.costo="",
                     this.newreservacion.fecha_salida="",
@@ -210,9 +215,10 @@
                     this.newreservacion.acompañantes="",
                     this.newreservacion.users_id=""
                     $('#guardarModal').modal('hide');
+                    toastr.success("La reservacion se guardo de manera correcta");
                 }
             }).catch(error=>{
-               console.log("ocurrio un error al guarda"); 
+              toastr.error("No se pudo guardar la reservacion");
             });
         },
           },

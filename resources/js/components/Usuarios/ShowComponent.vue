@@ -61,7 +61,7 @@
                     </div>
                     <!-- fin modal update -->
   </div>
-</template>
+</template> 
 <script>
  export default {
           data() {
@@ -91,9 +91,10 @@
                 let urlUpdate='Usuario/'+ this.usuarioedit.id;
                 axios.put(urlUpdate,this.usuarioedit).then(response =>{
                 if(response.data.error){
-                    consolo.log("ocurrio un error");
+                    toastr.error("Ocurrio un error al actualizar");
                     } else {
                 console.log("Se Actualizo de manera correctamente");
+                    toastr.info("Se actualizo de manera correcta");
                     $('#exampleModal').modal('hide')
                 }
                 }).catch(error=>{
